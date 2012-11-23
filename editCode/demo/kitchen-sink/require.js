@@ -98,7 +98,7 @@ var requirejs, require, define;
         }
         return target;
     }
-
+    
     //Similar to Function.prototype.bind, but the 'this' object is specified
     //first, since it is easier to read/figure out what 'this' will be.
     function bind(obj, fn) {
@@ -693,6 +693,7 @@ var requirejs, require, define;
             load: function () {
 	        	// Chargement de tous les fichiers
                 var url = this.map.url;
+                //alert(url);
                 //Regular dependency.
                 fichierUtil = fichierUtil + ", " + url;
                 if (!urlFetched[url]) {
@@ -1332,6 +1333,7 @@ var requirejs, require, define;
                     //Add extension if it is included. This is a bit wonky, only non-.js things pass
                     //an extension, this method probably needs to be reworked.
                     url = moduleName + (ext || '');
+                    //alert(url);
                 } else {
                     //A module that needs to be converted to a path.
                     paths = config.paths;
