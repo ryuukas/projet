@@ -56,7 +56,7 @@ var MultiSelect = require("ace/multi_select").MultiSelect;
 
 var doclist = require("./doclist");
 var modelist = require("./modelist");
-var layout = require("./layout");
+//var layout = require("./layout");
 var TokenTooltip = require("./token_tooltip").TokenTooltip;
 var util = require("./util");
 var saveOption = util.saveOption;
@@ -424,8 +424,8 @@ event.addListener(container, "drop", function(e) {
 
 
 
-var StatusBar = require("./statusbar").StatusBar;
-new StatusBar(env.editor, cmdLine.container);
+//var StatusBar = require("./statusbar").StatusBar;
+//new StatusBar(env.editor, cmdLine.container);
 
 });
 
