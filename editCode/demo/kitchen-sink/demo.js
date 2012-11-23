@@ -42,7 +42,7 @@ var lang = require("ace/lib/lang");
 var useragent = require("ace/lib/useragent");
 
 var event = require("ace/lib/event");
-var theme = require("ace/theme/textmate");
+var theme = require("ace/theme/cloud");
 var EditSession = require("ace/edit_session").EditSession;
 var UndoManager = require("ace/undomanager").UndoManager;
 
