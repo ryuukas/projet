@@ -1,4 +1,3 @@
-/* Etape 1 */
 var fichierUtil = "";
 var requirejs, require, define;
 
@@ -36,10 +35,6 @@ var requirejs, require, define;
         return ostring.call(it) === '[object Array]';
     }
 
-    /**
-     * Helper function for iterating over an array. If the func returns
-     * a true value, it will break out of the loop.
-     */
     function each(ary, func) {
         if (ary) {
             var i;
@@ -51,10 +46,6 @@ var requirejs, require, define;
         }
     }
 
-    /**
-     * Helper function for iterating over an array backwards. If the func
-     * returns a true value, it will break out of the loop.
-     */
     function eachReverse(ary, func) {
         if (ary) {
             var i;
@@ -120,9 +111,8 @@ var requirejs, require, define;
         return document.getElementsByTagName('script');
     }
 
-    //Allow getting a global that expressed in
-    //dot notation, like 'a.b.c'.
-    function getGlobal(value) {
+    // BEN
+   /* function getGlobal(value) {
         if (!value) {
             return value;
         }
@@ -131,16 +121,8 @@ var requirejs, require, define;
             g = g[part];
         });
         return g;
-    }
+    }*/
 
-    /**
-     * Constructs an error with a pointer to an URL with more information.
-     * @param {String} id the error ID that maps to an ID on a web page.
-     * @param {String} message human readable error.
-     * @param {Error} [err] the original error, if there is one.
-     *
-     * @returns {Error}
-     */
     function makeError(id, msg, err, requireModules) {
         var e = new Error(msg + '\nhttp://requirejs.org/docs/errors.html#' + id);
         e.requireType = id;
@@ -408,8 +390,9 @@ var requirejs, require, define;
             suffix = prefix && !pluginModule && !isNormalized ?
                      '_unnormalized' + (unnormalizedCounter += 1) :
                      '';
+      
             return {
-                prefix: prefix,
+	            prefix: prefix,
                 name: normalizedName,
                 parentMap: parentModuleMap,
                 unnormalized: !!suffix,
@@ -419,7 +402,7 @@ var requirejs, require, define;
                 id: (prefix ?
                         prefix + '!' + normalizedName :
                         normalizedName) + suffix
-            };
+            }
         }
 
         // Etape 6 
@@ -644,7 +627,7 @@ var requirejs, require, define;
         };
 
         Module.prototype = {
-	        /* Etape 7 DER */
+	        /* Etape 7  */
             init: function (depMaps, factory, errback, options) {
 	        	options = options || {};
 	        	if (this.inited) {
@@ -1073,20 +1056,14 @@ var requirejs, require, define;
             makeModuleMap: makeModuleMap,
             nextTick: req.nextTick,
 
-            /**
-             * Set a configuration for the context.
-             * @param {Object} cfg config object to integrate.
-             */
             configure: function (cfg) {
-        	    //Make sure the baseUrl ends in a slash.
-                if (cfg.baseUrl) {
+	            // Recherche la racine du site
+                if (cfg.baseUrl) {	           
                     if (cfg.baseUrl.charAt(cfg.baseUrl.length - 1) !== '/') {
                         cfg.baseUrl += '/';
                     }
                 }
 
-                //Save off the paths and packages since they require special processing,
-                //they are additive.
                 var pkgs = config.pkgs,
                     shim = config.shim,
                     objs = {
@@ -1098,6 +1075,7 @@ var requirejs, require, define;
                 eachProp(cfg, function (value, prop) {
                     if (objs[prop]) {
                         if (prop === 'map') {
+                    
                             mixin(config[prop], value, true, true);
                         } else {
                             mixin(config[prop], value, true);
@@ -1107,7 +1085,6 @@ var requirejs, require, define;
                     }
                 });
 
-                //Merge shim
                 if (cfg.shim) {
                     eachProp(cfg.shim, function (value, id) {
                         //Normalize the structure
@@ -1123,9 +1100,8 @@ var requirejs, require, define;
                     });
                     config.shim = shim;
                 }
-
-                //Adjust packages if necessary.
-                if (cfg.packages) {
+                
+	            if (cfg.packages) {
                     each(cfg.packages, function (pkgObj) {
                         var location;
 
@@ -1148,13 +1124,8 @@ var requirejs, require, define;
                         };
                     });
 
-                    //Done with modifications, assing packages back to context config
                     config.pkgs = pkgs;
                 }
-
-                //If there are any "waiting to execute" modules in the registry,
-                //update the maps for them, since their info, like URLs to load,
-                //may have changed.
                 eachProp(registry, function (mod, id) {
                     //If module already has init called, since it is too
                     //late to modify them, and ignore unnormalized ones
@@ -1172,7 +1143,8 @@ var requirejs, require, define;
                 }
             },
 
-            makeShimExports: function (value) {
+            // BEN
+/*            makeShimExports: function (value) {
         		function fn() {
                     var ret;
                     if (value.init) {
@@ -1182,7 +1154,7 @@ var requirejs, require, define;
                 }
                 return fn;
             },
-
+*/
             /* Etape 1 */
             makeRequire: function (relMap, options) {
         	    options = options || {};
