@@ -1,3 +1,4 @@
+
 /* ***** BEGIN LICENSE BLOCK *****
  * Distributed under the BSD license:
  *
@@ -32,7 +33,7 @@ define(function(require, exports, module) {
 "use strict";
 
 var dom = require("ace/lib/dom");
-var event = require("ace/lib/event");
+//var event = require("ace/lib/event");
 
 var EditSession = require("ace/edit_session").EditSession;
 var UndoManager = require("ace/undomanager").UndoManager;

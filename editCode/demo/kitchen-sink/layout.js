@@ -1,16 +1,16 @@
 define(function(require, exports, module) {
 "use strict";
 
-var dom = require("ace/lib/dom");
-var event = require("ace/lib/event");
+//var dom = require("ace/lib/dom");
+//var event = require("ace/lib/event");
 
-var EditSession = require("ace/edit_session").EditSession;
-var UndoManager = require("ace/undomanager").UndoManager;
-var Renderer = require("ace/virtual_renderer").VirtualRenderer;
-var Editor = require("ace/editor").Editor;
-var MultiSelect = require("ace/multi_select").MultiSelect;
+//var EditSession = require("ace/edit_session").EditSession;
+//var UndoManager = require("ace/undomanager").UndoManager;
+//var Renderer = require("ace/virtual_renderer").VirtualRenderer;
+//var Editor = require("ace/editor").Editor;
+//var MultiSelect = require("ace/multi_select").MultiSelect;
 
-dom.importCssString("\
+/*dom.importCssString("\
 splitter {\
     border: 1px solid #C6C6D2;\
     width: 0px;\
@@ -22,8 +22,8 @@ splitter:hover {\
     border-color: #B5B4E0;\
 }\
 ", "splitEditor");
-
-exports.edit = function(el) {
+*/
+/*exports.edit = function(el) {
     if (typeof(el) == "string")
         el = document.getElementById(el);
 
@@ -35,16 +35,16 @@ exports.edit = function(el) {
     });
     return editor;
 };
+*/
 
-
-var SplitRoot = function(el, theme, position, getSize) {
+/*var SplitRoot = function(el, theme, position, getSize) {
     el.style.position = position || "relative";
     this.container = el;
     this.getSize = getSize || this.getSize;
     this.resize = this.$resize.bind(this);
 
     event.addListener(el.ownerDocument.defaultView, "resize", this.resize);
-    this.editor = this.createEditor();
+//    this.editor = this.createEditor();
 };
 
 (function(){
@@ -55,10 +55,6 @@ var SplitRoot = function(el, theme, position, getSize) {
         this.$container.appendChild(el);
         var session = new EditSession("");
         var editor = new Editor(new Renderer(el, this.$theme));
-
-        /*editor.on("focus", function() {
-            this._emit("focus", editor);
-        }.bind(this));*/
 
         this.$editors.push(editor);
         editor.setFontSize(this.$fontSize);
@@ -96,9 +92,9 @@ var Split = function(){
     };
 
 }).call(Split.prototype);
+*/
 
-
-
+/*
 exports.singleLineEditor = function(el) {
     var renderer = new Renderer(el);
     el.style.overflow = "hidden";
@@ -174,7 +170,7 @@ exports.singleLineEditor = function(el) {
 
     renderer.setStyle("ace_one-line");
     var editor = new Editor(renderer);
-    new MultiSelect(editor);
+//    new MultiSelect(editor);
     editor.session.setUndoManager(new UndoManager());
 
     editor.setHighlightActiveLine(false);
@@ -188,6 +184,6 @@ exports.singleLineEditor = function(el) {
 };
 
 
-
+*/
 });
 

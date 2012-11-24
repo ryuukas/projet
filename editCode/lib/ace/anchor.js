@@ -34,23 +34,6 @@ define(function(require, exports, module) {
 var oop = require("./lib/oop");
 var EventEmitter = require("./lib/event_emitter").EventEmitter;
 
-/**
- * class Anchor
- *
- * Defines the floating pointer in the document. Whenever text is inserted or deleted before the cursor, the position of the cursor is updated
- *
- **/
-
-/**
- * new Anchor(doc, row, column)
- * - doc (Document): The document to associate with the anchor
- * - row (Number): The starting row position
- * - column (Number): The starting column position
- *
- * Creates a new `Anchor` and associates it with a document.
- *
- **/
-
 var Anchor = exports.Anchor = function(doc, row, column) {
     this.document = doc;
     
@@ -66,42 +49,16 @@ var Anchor = exports.Anchor = function(doc, row, column) {
 (function() {
 
     oop.implement(this, EventEmitter);
-    
-    /**
-     * Anchor.getPosition() -> Object
-     *
-     * Returns an object identifying the `row` and `column` position of the current anchor.
-     *
-     **/
 
     this.getPosition = function() {
         return this.$clipPositionToDocument(this.row, this.column);
     };
- 
-     /**
-     * Anchor.getDocument() -> Document
-     *
-     * Returns the current document.
-     *
-     **/
         
     this.getDocument = function() {
         return this.document;
     };
     
-     /**
-     * Anchor@change(e)
-     * - e (Object): An object containing information about the anchor position. It has two properties:
-       * `old`: An object describing the old Anchor position
-       * `value`: An object describing the new Anchor position  
-     Both of these objects have a `row` and `column` property corresponding to the position.
-     *
-     * Fires whenever the anchor position changes.
-     *
-     * Events that can trigger this function include [[Anchor.setPosition `setPosition()`]].
-     *
-     **/
-
+ 
     this.onChange = function(e) {
         var delta = e.data;
         var range = delta.range;
@@ -167,16 +124,6 @@ var Anchor = exports.Anchor = function(doc, row, column) {
         this.setPosition(row, column, true);
     };
 
-     /**
-     * Anchor.setPosition(row, column, noClip)
-     * - row (Number): The row index to move the anchor to
-     * - column (Number): The column index to move the anchor to
-     * - noClip (Boolean): Identifies if you want the position to be clipped
-     *
-     * Sets the anchor position to the specified row and column. If `noClip` is `true`, the position is not clipped.
-     *
-     **/
-
     this.setPosition = function(row, column, noClip) {
         var pos;
         if (noClip) {
@@ -205,26 +152,10 @@ var Anchor = exports.Anchor = function(doc, row, column) {
         });
     };
     
-    /**
-     * Anchor.detach()
-     *
-     * When called, the `'change'` event listener is removed.
-     *
-     **/
-
     this.detach = function() {
         this.document.removeEventListener("change", this.$onChange);
     };
     
-    /** internal, hide
-     * Anchor.clipPositionToDocument(row, column)
-     * - row (Number): The row index to clip the anchor to
-     * - column (Number): The column index to clip the anchor to
-     *
-     * Clips the anchor position to the specified row and column.
-     *
-     **/
-
     this.$clipPositionToDocument = function(row, column) {
         var pos = {};
     

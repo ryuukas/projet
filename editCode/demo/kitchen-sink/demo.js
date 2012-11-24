@@ -56,7 +56,7 @@ var Editor = require("ace/editor").Editor;
 
 var doclist = require("./doclist");
 var modelist = require("./modelist");
-var layout = require("./layout");
+//var layout = require("./layout");
 //var TokenTooltip = require("./token_tooltip").TokenTooltip;
 var util = require("./util");
 var saveOption = util.saveOption;
@@ -161,23 +161,23 @@ commands.addCommand({
     bindKey: {win: "Ctrl-S", mac: "Command-S"},
     exec: function() {alert("Fake Save File");}
 });
-*/
+
 var keybindings = {
     // Null = use "default" keymapping
 //    ace: null,
     //vim: vim,
     //emacs: emacs,
     // This is a way to define simple keyboard remappings
-/*    custom: new HashHandler({
+    custom: new HashHandler({
         "gotoright":      "Tab",
         "indent":         "]",
         "outdent":        "[",
         "gotolinestart":  "^",
         "gotolineend":    "$"
-    })*/
+    })
 };
 
-
+*/
 
 /*
 var consoleHeight = 20;

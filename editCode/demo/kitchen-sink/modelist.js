@@ -1,4 +1,3 @@
-/* Etape 2 */
 define(function(require, exports, module) {
 	/************** modes ***********************/
 	var modes = [];

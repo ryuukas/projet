@@ -39,8 +39,8 @@
 define(function(require, exports, module) {
 "use strict";
 
-require("./lib/fixoldbrowsers");
-
+//require("./lib/fixoldbrowsers");
+/*
 var Dom = require("./lib/dom");
 var Event = require("./lib/event");
 
@@ -56,13 +56,8 @@ require("./keyboard/hash_handler");
 require("./placeholder");
 require("./mode/folding/fold_mode");
 exports.config = require("./config");
-    /**
-     * Ace.edit(el) -> Editor
-     * - el (String | DOMElement): Either the id of an element, or the element itself
-     *
-     * This method embeds the Ace editor into the DOM, at the element provided by `el`.
-     *
-     **/
+
+
 exports.edit = function(el) {
     if (typeof(el) == "string") {
         var _id = el;
@@ -94,5 +89,5 @@ exports.edit = function(el) {
     editor.env = env;
     return editor;
 };
-
+*/
 });

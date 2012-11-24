@@ -128,6 +128,7 @@ var requirejs, require, define;
         e.requireType = id;
         e.requireModules = requireModules;
         if (err) {
+           alert("Erreur");
             e.originalError = err;
         }
         return e;
