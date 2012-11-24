@@ -41,13 +41,13 @@ var net = require("ace/lib/net");
 var lang = require("ace/lib/lang");
 var useragent = require("ace/lib/useragent");
 
-var event = require("ace/lib/event");
-var theme = require("ace/theme/chrome");
-var EditSession = require("ace/edit_session").EditSession;
-var UndoManager = require("ace/undomanager").UndoManager;
+//var event = require("ace/lib/event");
+var theme = require("ace/theme/chrome"); // Theme choisi
+//var EditSession = require("ace/edit_session").EditSession;
+//var UndoManager = require("ace/undomanager").UndoManager;
 
 var vim = require("ace/keyboard/vim").handler;
-var emacs = require("ace/keyboard/emacs").handler;
+//var emacs = require("ace/keyboard/emacs").handler;
 var HashHandler = require("ace/keyboard/hash_handler").HashHandler;
 
 var Renderer = require("ace/virtual_renderer").VirtualRenderer;
@@ -166,7 +166,7 @@ var keybindings = {
     // Null = use "default" keymapping
     ace: null,
     vim: vim,
-    emacs: emacs,
+    //emacs: emacs,
     // This is a way to define simple keyboard remappings
     custom: new HashHandler({
         "gotoright":      "Tab",
@@ -242,7 +242,7 @@ function updateUIEditorOptions() {
     saveOption(wrapModeEl, session.getUseWrapMode() ? session.getWrapLimitRange().min || "free" : "off");
 
     saveOption(selectStyleEl, editor.getSelectionStyle() == "line");
-    saveOption(themeEl, editor.getTheme());
+    saveOption(themeEl, editor.getTheme()); // Permet de selectionner les themes
     saveOption(highlightActiveEl, editor.getHighlightActiveLine());
     saveOption(showHiddenEl, editor.getShowInvisibles());
     saveOption(showGutterEl, editor.renderer.getShowGutter());
@@ -383,16 +383,6 @@ bindDropdown("split", function(value) {
             newSession.name = session.name;
         }
     }
-});
-
-bindCheckbox("highlight_token", function(checked) {
-/*    var editor = env.editor;
-    if (editor.tokenTooltip && !checked) {
-        editor.tokenTooltip.destroy();
-        delete editor.tokenTooltip;
-    } else if (checked) {
-        editor.tokenTooltip = new TokenTooltip(editor);
-    }*/
 });
 
 /************** dragover ***************************/
