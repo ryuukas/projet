@@ -32,27 +32,27 @@
 define(function(require, exports, module) {
 "use strict";
 
-require("ace/lib/fixoldbrowsers");
-require("ace/config").init();
+//require("ace/lib/fixoldbrowsers");
+//require("ace/config").init();
 var env = {};
 
-var dom = require("ace/lib/dom");
-var net = require("ace/lib/net");
-var lang = require("ace/lib/lang");
-var useragent = require("ace/lib/useragent");
+//var dom = require("ace/lib/dom");
+//var net = require("ace/lib/net");
+//var lang = require("ace/lib/lang");
+//var useragent = require("ace/lib/useragent");
 
 //var event = require("ace/lib/event");
 var theme = require("ace/theme/chrome"); // Theme choisi
 //var EditSession = require("ace/edit_session").EditSession;
 //var UndoManager = require("ace/undomanager").UndoManager;
 
-var vim = require("ace/keyboard/vim").handler;
+//var vim = require("ace/keyboard/vim").handler;
 //var emacs = require("ace/keyboard/emacs").handler;
-var HashHandler = require("ace/keyboard/hash_handler").HashHandler;
+//var HashHandler = require("ace/keyboard/hash_handler").HashHandler;
 
-var Renderer = require("ace/virtual_renderer").VirtualRenderer;
+//var Renderer = require("ace/virtual_renderer").VirtualRenderer;
 var Editor = require("ace/editor").Editor;
-var MultiSelect = require("ace/multi_select").MultiSelect;
+//var MultiSelect = require("ace/multi_select").MultiSelect;
 
 var doclist = require("./doclist");
 var modelist = require("./modelist");
@@ -73,36 +73,36 @@ var split = new Split(container, theme, 1);
 env.editor = split.getEditor(0);
 split.on("focus", function(editor) {
     env.editor = editor;
-    updateUIEditorOptions();
+//    updateUIEditorOptions();
 });
 env.split = split;
-window.env = env;
-window.ace = env.editor;
-env.editor.setAnimatedScroll(true);
+//window.env = env;
+//window.ace = env.editor;
+//env.editor.setAnimatedScroll(true);
 
 // add multiple cursor support to editor
-require("ace/multi_select").MultiSelect(env.editor);
+//require("ace/multi_select").MultiSelect(env.editor);
 
-var consoleEl = dom.createElement("div");
-container.parentNode.appendChild(consoleEl);
-consoleEl.style.cssText = "position:fixed; bottom:1px; right:0;\
-border:1px solid #baf; zIndex:100";
+//var consoleEl = dom.createElement("div");
+//container.parentNode.appendChild(consoleEl);
+//consoleEl.style.cssText = "position:fixed; bottom:1px; right:0;\
+//border:1px solid #baf; zIndex:100";
 
-var cmdLine = new layout.singleLineEditor(consoleEl);
-cmdLine.editor = env.editor;
-env.editor.cmdLine = cmdLine;
+//var cmdLine = new layout.singleLineEditor(consoleEl);
+//cmdLine.editor = env.editor;
+//env.editor.cmdLine = cmdLine;
 
 /**
  * This demonstrates how you can define commands and bind shortcuts to them.
  */
-env.editor.commands.addCommands([{
+/*env.editor.commands.addCommands([{
     name: "gotoline",
     bindKey: {win: "Ctrl-L", mac: "Command-L"},
     exec: function(editor, line) {
         if (typeof line == "object") {
             var arg = this.name + " " + editor.getCursorPosition().row;
-            editor.cmdLine.setValue(arg, 1);
-            editor.cmdLine.focus();
+           // editor.cmdLine.setValue(arg, 1);
+           // editor.cmdLine.focus();
             return;
         }
         line = parseInt(line, 10);
@@ -116,8 +116,8 @@ env.editor.commands.addCommands([{
     exec: function(editor, needle) {
         if (typeof needle == "object") {
             var arg = this.name + " " + editor.getCopyText();
-            editor.cmdLine.setValue(arg, 1);
-            editor.cmdLine.focus();
+            //editor.cmdLine.setValue(arg, 1);
+            //editor.cmdLine.focus();
             return;
         }
         editor.find(needle);
@@ -126,7 +126,7 @@ env.editor.commands.addCommands([{
 }, {
     name: "focusCommandLine",
     bindKey: "shift-esc",
-    exec: function(editor, needle) { editor.cmdLine.focus(); },
+//    exec: function(editor, needle) { editor.cmdLine.focus(); },
     readOnly: true
 }, {
     name: "execute",
@@ -137,49 +137,49 @@ env.editor.commands.addCommands([{
         } catch(e) {
             r = e;
         }
-        editor.cmdLine.setValue(r + "")
+//        editor.cmdLine.setValue(r + "")
     },
     readOnly: true
 }]);
+*/
+//cmdLine.commands.bindKeys({
+  //  "Shift-Return|Ctrl-Return|Alt-Return": function(cmdLine) { cmdLine.insert("\n"); },
+  //  "Esc|Shift-Esc": function(cmdLine){ cmdLine.editor.focus(); },
+  //  "Return": function(cmdLine){
+  //      var command = cmdLine.getValue().split(/\s+/);
+  //      var editor = cmdLine.editor;
+  //      editor.commands.exec(command[0], editor, command[1]);
+  //      editor.focus();
+  //  }
+//});
 
-cmdLine.commands.bindKeys({
-    "Shift-Return|Ctrl-Return|Alt-Return": function(cmdLine) { cmdLine.insert("\n"); },
-    "Esc|Shift-Esc": function(cmdLine){ cmdLine.editor.focus(); },
-    "Return": function(cmdLine){
-        var command = cmdLine.getValue().split(/\s+/);
-        var editor = cmdLine.editor;
-        editor.commands.exec(command[0], editor, command[1]);
-        editor.focus();
-    }
-});
-
-cmdLine.commands.removeCommands(["find", "gotoline", "findall", "replace", "replaceall"]);
-
+//cmdLine.commands.removeCommands(["find", "gotoline", "findall", "replace", "replaceall"]);
+/*
 var commands = env.editor.commands;
 commands.addCommand({
     name: "save",
     bindKey: {win: "Ctrl-S", mac: "Command-S"},
     exec: function() {alert("Fake Save File");}
 });
-
+*/
 var keybindings = {
     // Null = use "default" keymapping
-    ace: null,
-    vim: vim,
+//    ace: null,
+    //vim: vim,
     //emacs: emacs,
     // This is a way to define simple keyboard remappings
-    custom: new HashHandler({
+/*    custom: new HashHandler({
         "gotoright":      "Tab",
         "indent":         "]",
         "outdent":        "[",
         "gotolinestart":  "^",
         "gotolineend":    "$"
-    })
+    })*/
 };
 
 
 
-/*********** manage layout ***************************/
+/*
 var consoleHeight = 20;
 function onResize() {
     var left = env.split.$container.offsetLeft;
@@ -188,29 +188,29 @@ function onResize() {
     container.style.height = document.documentElement.clientHeight - consoleHeight + "px";
     env.split.resize();
 
-    consoleEl.style.width = width + "px";
-    cmdLine.resize();
+    //consoleEl.style.width = width + "px";
+    //cmdLine.resize();
 }
-
-window.onresize = onResize;
-onResize();
+*/
+//window.onresize = onResize;
+//onResize();
 
 /*********** options panel ***************************/
 var docEl = document.getElementById("doc");
 var modeEl = document.getElementById("mode");
-var wrapModeEl = document.getElementById("soft_wrap");
-var themeEl = document.getElementById("theme");
-var foldingEl = document.getElementById("folding");
-var selectStyleEl = document.getElementById("select_style");
-var highlightActiveEl = document.getElementById("highlight_active");
-var showHiddenEl = document.getElementById("show_hidden");
-var showGutterEl = document.getElementById("show_gutter");
-var showPrintMarginEl = document.getElementById("show_print_margin");
-var highlightSelectedWordE = document.getElementById("highlight_selected_word");
-var showHScrollEl = document.getElementById("show_hscroll");
-var animateScrollEl = document.getElementById("animate_scroll");
-var softTabEl = document.getElementById("soft_tab");
-var behavioursEl = document.getElementById("enable_behaviours");
+//var wrapModeEl = document.getElementById("soft_wrap");
+//var themeEl = document.getElementById("theme");
+//var foldingEl = document.getElementById("folding");
+//var selectStyleEl = document.getElementById("select_style");
+//var highlightActiveEl = document.getElementById("highlight_active");
+//var showHiddenEl = document.getElementById("show_hidden");
+//var showGutterEl = document.getElementById("show_gutter");
+//var showPrintMarginEl = document.getElementById("show_print_margin");
+//var highlightSelectedWordE = document.getElementById("highlight_selected_word");
+//var showHScrollEl = document.getElementById("show_hscroll");
+//var animateScrollEl = document.getElementById("animate_scroll");
+//var softTabEl = document.getElementById("soft_tab");
+//var behavioursEl = document.getElementById("enable_behaviours");
 
 fillDropdown(docEl, doclist.all);
 
@@ -226,34 +226,34 @@ bindDropdown("doc", function(name) {
         if (!session)
             return;
         session = env.split.setSession(session);
-        updateUIEditorOptions();
+       // updateUIEditorOptions();
         env.editor.focus();
     });
 });
 
 function updateUIEditorOptions() {
-    var editor = env.editor;
-    var session = editor.session;
+ //   var editor = env.editor;
+ //   var session = editor.session;
 
-    session.setFoldStyle(foldingEl.value);
+//    session.setFoldStyle(foldingEl.value);
 
-    saveOption(docEl, session.name);
-    saveOption(modeEl, session.modeName || "text");
-    saveOption(wrapModeEl, session.getUseWrapMode() ? session.getWrapLimitRange().min || "free" : "off");
+ //   saveOption(docEl, session.name);
+//    saveOption(modeEl, session.modeName || "text");
+//    saveOption(wrapModeEl, session.getUseWrapMode() ? session.getWrapLimitRange().min || "free" : "off");
 
-    saveOption(selectStyleEl, editor.getSelectionStyle() == "line");
-    saveOption(themeEl, editor.getTheme()); // Permet de selectionner les themes
-    saveOption(highlightActiveEl, editor.getHighlightActiveLine());
-    saveOption(showHiddenEl, editor.getShowInvisibles());
-    saveOption(showGutterEl, editor.renderer.getShowGutter());
-    saveOption(showPrintMarginEl, editor.renderer.getShowPrintMargin());
-    saveOption(highlightSelectedWordE, editor.getHighlightSelectedWord());
-    saveOption(showHScrollEl, editor.renderer.getHScrollBarAlwaysVisible());
-    saveOption(animateScrollEl, editor.getAnimatedScroll());
-    saveOption(softTabEl, session.getUseSoftTabs());
-    saveOption(behavioursEl, editor.getBehavioursEnabled());
+//    saveOption(selectStyleEl, editor.getSelectionStyle() == "line");
+//    saveOption(themeEl, editor.getTheme()); // Permet de selectionner les themes
+//    saveOption(highlightActiveEl, editor.getHighlightActiveLine());
+//    saveOption(showHiddenEl, editor.getShowInvisibles());
+//    saveOption(showGutterEl, editor.renderer.getShowGutter());
+//    saveOption(showPrintMarginEl, editor.renderer.getShowPrintMargin());
+//    saveOption(highlightSelectedWordE, editor.getHighlightSelectedWord());
+//    saveOption(showHScrollEl, editor.renderer.getHScrollBarAlwaysVisible());
+//    saveOption(animateScrollEl, editor.getAnimatedScroll());
+//    saveOption(softTabEl, session.getUseSoftTabs());
+//    saveOption(behavioursEl, editor.getBehavioursEnabled());
 }
-
+/*
 event.addListener(themeEl, "mouseover", function(e){
     this.desiredValue = e.target.value;
     if (!this.$timer)
@@ -293,22 +293,22 @@ bindDropdown("folding", function(value) {
 
 bindDropdown("soft_wrap", function(value) {
     var session = env.editor.session;
-    var renderer = env.editor.renderer;
+    //var renderer = env.editor.renderer;
     switch (value) {
         case "off":
             session.setUseWrapMode(false);
-            renderer.setPrintMarginColumn(80);
+        //    renderer.setPrintMarginColumn(80);
             break;
         case "free":
             session.setUseWrapMode(true);
             session.setWrapLimitRange(null, null);
-            renderer.setPrintMarginColumn(80);
+            //renderer.setPrintMarginColumn(80);
             break;
         default:
             session.setUseWrapMode(true);
             var col = parseInt(value, 10);
             session.setWrapLimitRange(col, col);
-            renderer.setPrintMarginColumn(col);
+            //renderer.setPrintMarginColumn(col);
     }
 });
 
@@ -329,11 +329,11 @@ bindCheckbox("display_indent_guides", function(checked) {
 });
 
 bindCheckbox("show_gutter", function(checked) {
-    env.editor.renderer.setShowGutter(checked);
+//    env.editor.renderer.setShowGutter(checked);
 });
 
 bindCheckbox("show_print_margin", function(checked) {
-    env.editor.renderer.setShowPrintMargin(checked);
+//    env.editor.renderer.setShowPrintMargin(checked);
 });
 
 bindCheckbox("highlight_selected_word", function(checked) {
@@ -341,7 +341,7 @@ bindCheckbox("highlight_selected_word", function(checked) {
 });
 
 bindCheckbox("show_hscroll", function(checked) {
-    env.editor.renderer.setHScrollBarAlwaysVisible(checked);
+//    env.editor.renderer.setHScrollBarAlwaysVisible(checked);
 });
 
 bindCheckbox("animate_scroll", function(checked) {
@@ -359,9 +359,9 @@ bindCheckbox("enable_behaviours", function(checked) {
 bindCheckbox("fade_fold_widgets", function(checked) {
     env.editor.setFadeFoldWidgets(checked);
 });
-
-var secondSession = null;
-bindDropdown("split", function(value) {
+*/
+//var secondSession = null;
+/*bindDropdown("split", function(value) {
     var sp = env.split;
     if (value == "none") {
         if (sp.getSplits() == 2) {
@@ -383,9 +383,8 @@ bindDropdown("split", function(value) {
             newSession.name = session.name;
         }
     }
-});
-
-/************** dragover ***************************/
+});*/
+/*
 event.addListener(container, "dragover", function(e) {
     return event.preventDefault(e);
 });
@@ -411,7 +410,7 @@ event.addListener(container, "drop", function(e) {
         return event.stopEvent(e);
     }
 });
-
+*/
 
 
 //var StatusBar = require("./statusbar").StatusBar;
