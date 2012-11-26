@@ -5,7 +5,7 @@ require("./lib/fixoldbrowsers");
 
 var oop = require("./lib/oop");
 //var lang = require("./lib/lang");
-var useragent = require("./lib/useragent");
+//var useragent = require("./lib/useragent");
 var TextInput = require("./keyboard/textinput").TextInput;
 var MouseHandler = require("./mouse/mouse_handler").MouseHandler;
 var FoldHandler = require("./mouse/fold_handler").FoldHandler;
@@ -16,6 +16,7 @@ var Range = require("./range").Range;
 var EventEmitter = require("./lib/event_emitter").EventEmitter;
 var CommandManager = require("./commands/command_manager").CommandManager;
 var defaultCommands = require("./commands/default_commands").commands;
+
 
 /**
  * class Editor
@@ -37,7 +38,7 @@ var Editor = function(renderer, session) {
     this.container = container;
     this.renderer = renderer;
 
-    this.commands = new CommandManager(useragent.isMac ? "mac" : "win", defaultCommands);
+    this.commands = new CommandManager("mac", defaultCommands); //useragent.isMac ? "mac" : "win", defaultCommands);
     this.textInput  = new TextInput(renderer.getTextAreaContainer(), this);
     this.renderer.textarea = this.textInput.getElement();
     this.keyBinding = new KeyBinding(this);

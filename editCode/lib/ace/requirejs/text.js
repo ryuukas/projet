@@ -39,8 +39,8 @@ var globalRequire = typeof require != "undefined" && require;
 define(function (require, exports, module) {
     "use strict";
     exports.load = function (name, req, onLoad, config) {
-	    // appel de chrome.css, textemate.css
-        require("../lib/net").get(req.toUrl(name), onLoad);
+	    // appel de chrome.css, editor.css et textemate.css
+	    require("../lib/net").get(req.toUrl(name), onLoad);
     };
 });
 

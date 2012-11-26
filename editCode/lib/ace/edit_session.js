@@ -266,11 +266,6 @@ var EditSession = function(text, mode) {
 
         if (undoManager) {
             var self = this;
-    /** internal, hide
-    * EditSession.$syncInformUndoManager()
-    *
-    *
-    **/
             this.$syncInformUndoManager = function() {
                 self.$informUndoManager.cancel();
 
