@@ -217,7 +217,7 @@ function optgroup(values) {
     return values.map(function(item) {
         if (typeof item == "string")
             item = {name: item, desc: item};
-        return elt("option", {value: item.name}, item.desc);
+        return elt("li", {value: item.path}, item.desc);
     });
 }
 
@@ -226,7 +226,7 @@ function dropdown(values) {
         return optgroup(values);
 
     return Object.keys(values).map(function(i) {
-        return elt("optgroup", {"label": i}, optgroup(values[i]));
+        return elt("li", {"label": i}, optgroup(values[i]));
     });
 }
 

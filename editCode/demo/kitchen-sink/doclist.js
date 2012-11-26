@@ -64,7 +64,17 @@
 	}
 	
 	var docs = {
+<<<<<<< HEAD
 	    "docs/javascript.js": "JavaScript",
+=======
+	  /*  "docs/AsciiDoc.asciidoc": "AsciiDoc",*/
+	    "docs/totojavascript.js": "JavaScript",
+	/*    "docs/clojure.clj": "Clojure",
+	    "docs/coffeescript.coffee": "Coffeescript",
+	    "docs/coldfusion.cfm": "ColdFusion",
+	    "docs/cpp.cpp": "C/C++",
+	    "docs/csharp.cs": "C#",*/
+>>>>>>> Liste fichier
 	    "docs/css.css": "CSS",
 	    "docs/html.html": "HTML",
 	    "docs/php.php": "PHP",

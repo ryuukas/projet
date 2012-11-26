@@ -115,7 +115,7 @@ function DefaultHandlers(mouseHandler) {
             this.editor.moveCursorToPosition(pos);
             this.editor.selection.clearSelection();
         }
-        this.setState("select");
+        this.setState("li");
     };
 
     this.select = function() {
@@ -274,7 +274,7 @@ function DefaultHandlers(mouseHandler) {
                 range.end.column++;
             }
             this.$clickSelection = range;
-            this.setState("select");
+            this.setState("li");
             return;
         }
 
