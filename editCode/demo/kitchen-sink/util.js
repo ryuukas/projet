@@ -123,6 +123,7 @@ exports.createSplitEditor = function(el) {
     return split;
 };
 
+
 /***************************/
 exports.stripLeadingComments = function(str) {
     if(str.slice(0,2)=='/*') {
@@ -205,9 +206,9 @@ function elt(tag, attributes, content) {
     } else if (content) {
         content.forEach(function(ch) {
             el.appendChild(ch);
+           // alert(ch.textContent);
         });
     }
-
     for (var i in attributes)
         el.setAttribute(i, attributes[i]);
     return el;
