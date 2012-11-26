@@ -6,8 +6,8 @@ var Selection = require("./selection").Selection;
 var onMouseDown = require("./mouse/multi_select_handler").onMouseDown;
 var event = require("./lib/event");
 //var lang = require("./lib/lang");
-var commands = require("./commands/multi_select_commands");
-exports.commands = commands.defaultCommands.concat(commands.multiSelectCommands);
+//var commands = require("./commands/multi_select_commands");
+//exports.commands = commands.defaultCommands.concat(commands.multiSelectCommands);
 
 // Todo: session.find or editor.findVolatile that returns range
 var Search = require("./search").Search;
@@ -328,8 +328,8 @@ var Editor = require("./editor").Editor;
         this.inMultiSelectMode = true;
 
         this.setStyle("ace_multiselect");
-        this.keyBinding.addKeyboardHandler(commands.keyboardHandler);
-        this.commands.on("exec", this.$onMultiSelectExec);
+//        this.keyBinding.addKeyboardHandler(commands.keyboardHandler);
+//        this.commands.on("exec", this.$onMultiSelectExec);
 
         this.renderer.updateCursor();
         this.renderer.updateBackMarkers();
@@ -341,9 +341,9 @@ var Editor = require("./editor").Editor;
         this.inMultiSelectMode = false;
 
         this.unsetStyle("ace_multiselect");
-        this.keyBinding.removeKeyboardHandler(commands.keyboardHandler);
+        //this.keyBinding.removeKeyboardHandler(commands.keyboardHandler);
 
-        this.commands.removeEventListener("exec", this.$onMultiSelectExec);
+//        this.commands.removeEventListener("exec", this.$onMultiSelectExec);
         this.renderer.updateCursor();
         this.renderer.updateBackMarkers();
     };
@@ -433,8 +433,8 @@ var Editor = require("./editor").Editor;
         var lines = text.split(/\r\n|\r|\n/);
         var ranges = this.selection.rangeList.ranges;
 
-        if (lines.length > ranges.length || (lines.length <= 2 || !lines[1]))
-            return this.commands.exec("insertstring", this, text);
+//        if (lines.length > ranges.length || (lines.length <= 2 || !lines[1]))
+  //          return this.commands.exec("insertstring", this, text);
 
         for (var i = ranges.length; i--; ) {
             var range = ranges[i];
@@ -730,7 +730,7 @@ function MultiSelect(editor) {
     editor.on("changeSession", exports.onSessionChange.bind(editor));
 
     editor.on("mousedown", onMouseDown);
-    editor.commands.addCommands(commands.defaultCommands);
+    //editor.commands.addCommands(commands.defaultCommands);
 
     addAltCursorListeners(editor);
 }

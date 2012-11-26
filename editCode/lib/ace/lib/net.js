@@ -8,7 +8,7 @@
 define(function(require, exports, module) {
 "use strict";
 
-	var useragent = require("./useragent");
+//	var useragent = require("./useragent");
 
 	exports.get = function (url, callback) {
 	    var xhr = exports.createXhr();
@@ -57,11 +57,11 @@ define(function(require, exports, module) {
 	
 	    s.src = path;
 	    head.appendChild(s);
-	    if (useragent.isOldIE)
-	        s.onreadystatechange = function () {
-	            this.readyState == 'loaded' && callback();
-	        };
-	    else
+//	    if (useragent.isOldIE)
+//	        s.onreadystatechange = function () {
+//	            this.readyState == 'loaded' && callback();
+//	        };
+//	    else
 	        s.onload = callback;
 	};
 

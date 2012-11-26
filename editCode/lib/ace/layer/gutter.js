@@ -33,7 +33,7 @@ define(function(require, exports, module) {
 
 var dom = require("../lib/dom");
 var oop = require("../lib/oop");
-var lang = require("../lib/lang");
+//var lang = require("../lib/lang");
 var EventEmitter = require("../lib/event_emitter").EventEmitter;
 
 var Gutter = function(parentEl) {
@@ -73,7 +73,7 @@ var Gutter = function(parentEl) {
 
     this.setAnnotations = function(annotations) {
         // iterate over sparse array
-        this.$annotations = []
+    /*    this.$annotations = []
         var rowInfo, row;
         for (var i = 0; i < annotations.length; i++) {
             var annotation = annotations[i];
@@ -95,7 +95,7 @@ var Gutter = function(parentEl) {
                 rowInfo.className = " ace_warning";
             else if (type == "info" && (!rowInfo.className))
                 rowInfo.className = " ace_info";
-        }
+        }*/
     };
 
     this.$updateAnnotations = function (e) {
