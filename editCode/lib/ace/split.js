@@ -32,7 +32,7 @@ define(function(require, exports, module) {
 "use strict";
 
 var oop = require("./lib/oop");
-var lang = require("./lib/lang");
+//var lang = require("./lib/lang");
 var EventEmitter = require("./lib/event_emitter").EventEmitter;
 
 var Editor = require("./editor").Editor;
@@ -245,7 +245,7 @@ var Split = function(container, theme, splits) {
 
         // Overwrite the default $informUndoManager function such that new delas
         // aren't added to the undo manager from the new and the old session.
-        s.$informUndoManager = lang.deferredCall(function() { s.$deltas = []; });
+//        s.$informUndoManager = lang.deferredCall(function() { s.$deltas = []; });
 
         // Copy over 'settings' from the session.
         s.setTabSize(session.getTabSize());
