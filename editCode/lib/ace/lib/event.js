@@ -283,7 +283,7 @@ exports.addCommandKeyListener = function(el, callback) {
    // }
 };
 
-if (window.postMessage){// && !useragent.isOldIE) {
+if (window.postMessage){	// && !useragent.isOldIE) {
     var postMessageId = 1;
     exports.nextTick = function(callback, win) {
         win = win || window;
