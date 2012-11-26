@@ -11,7 +11,7 @@ var TextMode = require("./mode/text").Mode;
 var Range = require("./range").Range;
 var Document = require("./document").Document;
 var BackgroundTokenizer = require("./background_tokenizer").BackgroundTokenizer;
-var SearchHighlight = require("./search_highlight").SearchHighlight;
+//var SearchHighlight = require("./search_highlight").SearchHighlight;
 
 
 var EditSession = function(text, mode) {
@@ -599,11 +599,11 @@ var EditSession = function(text, mode) {
     };
 
     this.highlight = function(re) {
-        if (!this.$searchHighlight) {
+        /*if (!this.$searchHighlight) {
             var highlight = new SearchHighlight(null, "ace_selected-word", "text");
             this.$searchHighlight = this.addDynamicMarker(highlight);
         }
-        this.$searchHighlight.setRegexp(re);
+        this.$searchHighlight.setRegexp(re);*/
     }
     
     // experimental
