@@ -44,7 +44,7 @@ var env = {};
 //var event = require("ace/lib/event");
 var theme = require("ace/theme/chrome"); // Theme choisi
 //var EditSession = require("ace/edit_session").EditSession;
-var UndoManager = require("ace/undomanager").UndoManager;
+//var UndoManager = require("ace/undomanager").UndoManager;
 
 //var vim = require("ace/keyboard/vim").handler;
 //var emacs = require("ace/keyboard/emacs").handler;

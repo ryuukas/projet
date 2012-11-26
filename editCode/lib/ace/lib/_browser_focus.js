@@ -31,55 +31,65 @@
 define(function(require, exports, module) {
 "use strict";
 
-var event = require("./lib/event");
+var oop = require("./oop");
+var event = require("./event");
+var EventEmitter = require("./event_emitter").EventEmitter;
 
-/** internal, hide
- * class RenderLoop
- *
- * Batches changes (that force something to be redrawn) in the background.
- *
- **/
+/*
+ * This class keeps track of the focus state of the given window.
+ * Focus changes for example when the user switches a browser tab,
+ * goes to the location bar or switches to another application.
+ */ 
+var BrowserFocus = function(win) {
+    win = win || window;
+    
+    this.lastFocus = new Date().getTime();
+    this._isFocused = true;
+    
+    var _self = this;
 
-/** internal, hide
- * new RenderLoop(onRender, win)
- *
- * 
- *
-**/
-var RenderLoop = function(onRender, win) {
-    this.onRender = onRender;
-    this.pending = false;
-    this.changes = 0;
-    this.window = win || window;
+    // IE < 9 supports focusin and focusout events
+    if ("onfocusin" in win.document) {
+        event.addListener(win.document, "focusin", function(e) {
+            _self._setFocused(true);
+        });
+
+        event.addListener(win.document, "focusout", function(e) {
+            _self._setFocused(!!e.toElement);
+        });
+    }
+    else {
+        event.addListener(win, "blur", function(e) {
+            _self._setFocused(false);
+        });
+
+        event.addListener(win, "focus", function(e) {
+            _self._setFocused(true);
+        });
+    }
 };
 
-(function() {
+(function(){
 
-    /** internal, hide
-     * RenderLoop.schedule(change)
-     * - change (Array):
-     * 
-     * 
-     **/
-    this.schedule = function(change) {
-        //this.onRender(change);
-        //return;
-        this.changes = this.changes | change;
-        if (!this.pending) {
-            this.pending = true;
-            var _self = this;
-            event.nextFrame(function() {
-                _self.pending = false;
-                var changes;
-                while (changes = _self.changes) {
-                    _self.changes = 0;
-                    _self.onRender(changes);
-                }
-            }, this.window);
-        }
+    oop.implement(this, EventEmitter);
+    
+    this.isFocused = function() {
+        return this._isFocused;
+    };
+    
+    this._setFocused = function(isFocused) {
+        if (this._isFocused == isFocused)
+            return;
+            
+        if (isFocused)
+            this.lastFocus = new Date().getTime();
+            
+        this._isFocused = isFocused;
+        this._emit("changeFocus");
     };
 
-}).call(RenderLoop.prototype);
+}).call(BrowserFocus.prototype);
 
-exports.RenderLoop = RenderLoop;
+
+exports.BrowserFocus = BrowserFocus;
 });

@@ -31,55 +31,54 @@
 define(function(require, exports, module) {
 "use strict";
 
-var event = require("./lib/event");
+var lang = require("./lib/lang");
+var oop = require("./lib/oop");
+var Range = require("./range").Range;
 
-/** internal, hide
- * class RenderLoop
- *
- * Batches changes (that force something to be redrawn) in the background.
- *
- **/
-
-/** internal, hide
- * new RenderLoop(onRender, win)
- *
- * 
- *
-**/
-var RenderLoop = function(onRender, win) {
-    this.onRender = onRender;
-    this.pending = false;
-    this.changes = 0;
-    this.window = win || window;
+var SearchHighlight = function(regExp, clazz, type) {
+    this.setRegexp(regExp);
+    this.clazz = clazz;
+    this.type = type || "text";
 };
 
 (function() {
+    // needed to prevent long lines from freezing the browser
+    this.MAX_RANGES = 500;
+    
+    this.setRegexp = function(regExp) {
+        if (this.regExp+"" == regExp+"")
+            return;
+        this.regExp = regExp;
+        this.cache = [];
+    };
 
-    /** internal, hide
-     * RenderLoop.schedule(change)
-     * - change (Array):
-     * 
-     * 
-     **/
-    this.schedule = function(change) {
-        //this.onRender(change);
-        //return;
-        this.changes = this.changes | change;
-        if (!this.pending) {
-            this.pending = true;
-            var _self = this;
-            event.nextFrame(function() {
-                _self.pending = false;
-                var changes;
-                while (changes = _self.changes) {
-                    _self.changes = 0;
-                    _self.onRender(changes);
-                }
-            }, this.window);
+    this.update = function(html, markerLayer, session, config) {
+        if (!this.regExp)
+            return;
+        var start = config.firstRow, end = config.lastRow;
+
+        for (var i = start; i <= end; i++) {
+            var ranges = this.cache[i];
+            if (ranges == null) {
+                ranges = lang.getMatchOffsets(session.getLine(i), this.regExp);
+                if (ranges.length > this.MAX_RANGES)
+                    ranges = ranges.slice(0, this.MAX_RANGES);
+                ranges = ranges.map(function(match) {
+                    return new Range(i, match.offset, i, match.offset + match.length);
+                });
+                this.cache[i] = ranges.length ? ranges : "";
+            }
+
+            for (var j = ranges.length; j --; ) {
+                markerLayer.drawSingleLineMarker(
+                    html, ranges[j].toScreenRange(session), this.clazz, config,
+                    null, this.type
+                );
+            }
         }
     };
 
-}).call(RenderLoop.prototype);
+}).call(SearchHighlight.prototype);
 
-exports.RenderLoop = RenderLoop;
+exports.SearchHighlight = SearchHighlight;
 });
