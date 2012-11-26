@@ -217,7 +217,7 @@ function optgroup(values) {
     return values.map(function(item) {
         if (typeof item == "string")
             item = {name: item, desc: item};
-        return elt("li", {value: item.path}, item.desc);
+        return elt("li", {value: item.name}, item.desc);
     });
 }
 
