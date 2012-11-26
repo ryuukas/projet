@@ -34,7 +34,7 @@ define(function(require, exports, module) {
 var oop = require("../../lib/oop");
 var Behaviour = require("../behaviour").Behaviour;
 var TokenIterator = require("../../token_iterator").TokenIterator;
-var lang = require("../../lib/lang");
+//var lang = require("../../lib/lang");
 
 var SAFE_INSERT_IN_TOKENS =
     ["text", "paren.rparen", "punctuation.operator"];
@@ -161,7 +161,7 @@ var CstyleBehaviour = function () {
         } else if (text == "\n" || text == "\r\n") {
             var closing = "";
             if (CstyleBehaviour.isMaybeInsertedClosing(cursor, line)) {
-                closing = lang.stringRepeat("}", maybeInsertedBrackets);
+                //closing = lang.stringRepeat("}", maybeInsertedBrackets);
                 CstyleBehaviour.clearMaybeInsertedClosing();
             }
             var rightChar = line.substring(cursor.column, cursor.column + 1);
