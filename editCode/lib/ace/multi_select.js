@@ -1,5 +1,5 @@
 define(function(require, exports, module) {
-/*
+
 var RangeList = require("./range_list").RangeList;
 var Range = require("./range").Range;
 var Selection = require("./selection").Selection;
@@ -260,9 +260,9 @@ var EditSession = require("./edit_session").EditSession;
         }
 
         return rectSel;
-    };*/
+    };
 }).call(Selection.prototype);
-/*
+
 // extend Editor
 var Editor = require("./editor").Editor;
 (function() {
@@ -762,4 +762,4 @@ function addAltCursorListeners(editor){
 
 exports.MultiSelect = MultiSelect;
 
-});*/
+});
