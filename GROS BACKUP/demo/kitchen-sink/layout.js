@@ -5,7 +5,7 @@ define(function(require, exports, module) {
 //var event = require("ace/lib/event");
 
 //var EditSession = require("ace/edit_session").EditSession;
-var UndoManager = require("ace/undomanager").UndoManager;
+//var UndoManager = require("ace/undomanager").UndoManager;
 //var Renderer = require("ace/virtual_renderer").VirtualRenderer;
 //var Editor = require("ace/editor").Editor;
 //var MultiSelect = require("ace/multi_select").MultiSelect;
@@ -94,7 +94,7 @@ var Split = function(){
 }).call(Split.prototype);
 */
 
-
+/*
 exports.singleLineEditor = function(el) {
     var renderer = new Renderer(el);
     el.style.overflow = "hidden";
@@ -184,5 +184,6 @@ exports.singleLineEditor = function(el) {
 };
 
 
+*/
 });
 

@@ -3,8 +3,8 @@ define(function(require, exports, module) {
 
 var config = require("./config");
 var oop = require("./lib/oop");
-var lang = require("./lib/lang");
-var net = require("./lib/net");
+//var lang = require("./lib/lang");
+//var net = require("./lib/net");
 var EventEmitter = require("./lib/event_emitter").EventEmitter;
 var Selection = require("./selection").Selection;
 var TextMode = require("./mode/text").Mode;
@@ -147,7 +147,7 @@ var EditSession = function(text, mode) {
                 });
             }
 
-      //     this.$informUndoManager.schedule();
+//            this.$informUndoManager.schedule();
         }
 
         this.bgTokenizer.$updateOnChange(delta);
@@ -261,8 +261,8 @@ var EditSession = function(text, mode) {
         this.$deltasDoc = [];
         this.$deltasFold = [];
 
-        if (this.$informUndoManager)
-            this.$informUndoManager.cancel();
+//        if (this.$informUndoManager)
+  //          this.$informUndoManager.cancel();
 
         if (undoManager) {
             var self = this;
@@ -294,8 +294,8 @@ var EditSession = function(text, mode) {
 
                 self.$deltas = [];
             }
-           this.$informUndoManager =
-                lang.deferredCall(this.$syncInformUndoManager);
+//            this.$informUndoManager =
+  //              lang.deferredCall(this.$syncInformUndoManager);
         }
     };
 
@@ -321,11 +321,11 @@ var EditSession = function(text, mode) {
     **/
     this.getTabString = function() {
     	//alert(this.getTabSize());
-        if (this.getUseSoftTabs()) {
-            return lang.stringRepeat(" ", this.getTabSize());
-        } else {
+        //if (this.getUseSoftTabs()) {
+        //    return lang.stringRepeat(" ", this.getTabSize());
+       // } else {
             return "\t";
-        }
+        //}
     };
 
     this.$useSoftTabs = true;
@@ -1757,7 +1757,7 @@ var EditSession = function(text, mode) {
         while (row <= lastRow) {
             foldLine = this.getFoldLine(row, foldLine);
             if (!foldLine) {
-                tokens = this.$getDisplayTokens(lang.stringTrimRight(lines[row]));
+//                tokens = this.$getDisplayTokens(lang.stringTrimRight(lines[row]));
                 wrapData[row] = this.$computeWrapSplits(tokens, wrapLimit, tabSize);
                 row ++;
             } else {

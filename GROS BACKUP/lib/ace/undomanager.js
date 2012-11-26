@@ -6,6 +6,7 @@ var UndoManager = function() {
 };
 
 (function() {
+
     /**
     * UndoManager.execute(options) -> Void
     * - options (Object): Contains additional properties
@@ -32,7 +33,6 @@ var UndoManager = function() {
     this.undo = function(dontSelect) {
         var deltas = this.$undoStack.pop();
         var undoSelectionRange = null;
-        
         if (deltas) {
             undoSelectionRange =
                 this.$doc.undoChanges(deltas, dontSelect);
