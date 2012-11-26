@@ -5,7 +5,7 @@ var Range = require("./range").Range;
 var Selection = require("./selection").Selection;
 var onMouseDown = require("./mouse/multi_select_handler").onMouseDown;
 var event = require("./lib/event");
-var lang = require("./lib/lang");
+//var lang = require("./lib/lang");
 var commands = require("./commands/multi_select_commands");
 exports.commands = commands.defaultCommands.concat(commands.multiSelectCommands);
 
@@ -611,10 +611,10 @@ var Editor = require("./editor").Editor;
                 var p = r.cursor;
                 var l = maxCol - p.column;
                 var d = spaceOffsets[i] - minSpace;
-                if (l > d)
-                    session.insert(p, lang.stringRepeat(" ", l - d));
-                else
-                    session.remove(new Range(p.row, p.column, p.row, p.column - l + d));
+//                if (l > d)
+  //                  session.insert(p, lang.stringRepeat(" ", l - d));
+    //            else
+      ///              session.remove(new Range(p.row, p.column, p.row, p.column - l + d));
 
                 r.start.column = r.end.column = maxCol;
                 r.start.row = r.end.row = p.row;

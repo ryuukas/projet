@@ -1,7 +1,7 @@
 define(function(require, exports, module) {
 "no use strict";
 
-var lang = require("./lib/lang");
+//var lang = require("./lib/lang");
 
 var global = (function() {
     return this;
@@ -32,7 +32,7 @@ exports.set = function(key, value) {
 };
 
 exports.all = function() {
-    return lang.copyObject(options);
+//    return lang.copyObject(options);
 };
 
 exports.moduleUrl = function(name, component) {
