@@ -32,7 +32,7 @@ define(function(require, exports, module) {
 "use strict";
 
 var oop = require("./lib/oop");
-var lang = require("./lib/lang");
+//var lang = require("./lib/lang");
 var EventEmitter = require("./lib/event_emitter").EventEmitter;
 var Range = require("./range").Range;
 
@@ -655,17 +655,17 @@ var Selection = function(session) {
             str = this.doc.getLine(row).substring(0, column)
         }
 
-        var leftOfCursor = lang.stringReverse(str);
+//        var leftOfCursor = lang.stringReverse(str);
         var match;
         this.session.nonTokenRe.lastIndex = 0;
         this.session.tokenRe.lastIndex = 0;
 
         // skip whitespace
-        if (match = this.session.nonTokenRe.exec(leftOfCursor)) {
-            column -= this.session.nonTokenRe.lastIndex;
-            leftOfCursor = leftOfCursor.slice(this.session.nonTokenRe.lastIndex);
-            this.session.nonTokenRe.lastIndex = 0;
-        }
+//        if (match = this.session.nonTokenRe.exec(leftOfCursor)) {
+  //          column -= this.session.nonTokenRe.lastIndex;
+    //        leftOfCursor = leftOfCursor.slice(this.session.nonTokenRe.lastIndex);
+      //      this.session.nonTokenRe.lastIndex = 0;
+      //  }
 
         // if at begin of the line proceed in line above
         if (column <= 0) {
@@ -677,10 +677,10 @@ var Selection = function(session) {
         }
 
         // move to the begin of the word
-        if (match = this.session.tokenRe.exec(leftOfCursor)) {
-            column -= this.session.tokenRe.lastIndex;
-            this.session.tokenRe.lastIndex = 0;
-        }
+//        if (match = this.session.tokenRe.exec(leftOfCursor)) {
+ //           column -= this.session.tokenRe.lastIndex;
+  //          this.session.tokenRe.lastIndex = 0;
+   //     }
 
         this.moveCursorTo(row, column);
     };
@@ -768,8 +768,8 @@ var Selection = function(session) {
                 line = ""
         }
 
-        var leftOfCursor = lang.stringReverse(line);
-        var index = this.$shortWordEndIndex(leftOfCursor);
+//        var leftOfCursor = lang.stringReverse(line);
+ //       var index = this.$shortWordEndIndex(leftOfCursor);
 
         return this.moveCursorTo(row, column - index);
     };
