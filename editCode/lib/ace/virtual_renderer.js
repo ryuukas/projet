@@ -4,9 +4,9 @@ define(function(require, exports, module) {
 var oop = require("./lib/oop");
 var dom = require("./lib/dom");
 var event = require("./lib/event");
-var useragent = require("./lib/useragent");
-var config = require("./config");
-var net = require("./lib/net");
+//var useragent = require("./lib/useragent");
+//var config = require("./config");
+//var net = require("./lib/net");
 var GutterLayer = require("./layer/gutter").Gutter;
 var MarkerLayer = require("./layer/marker").Marker;
 var TextLayer = require("./layer/text").Text;
@@ -44,7 +44,7 @@ var VirtualRenderer = function(container, theme) {
 //    dom.importCssString(editorCss, "ace_editor", container.ownerDocument);
 
     // in IE <= 9 the native cursor always shines through
-    this.$keepTextAreaAtCursor = !useragent.isIE;
+//    this.$keepTextAreaAtCursor = !useragent.isIE;
 
     dom.addCssClass(container, "ace_editor");
 
@@ -1251,7 +1251,7 @@ var VirtualRenderer = function(container, theme) {
         if (!config.get("packaged"))
             return callback();
 
-        net.loadScript(config.moduleUrl(name, "theme"), callback);
+        //net.loadScript(config.moduleUrl(name, "theme"), callback);
     };
 
     /**
