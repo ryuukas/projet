@@ -64,59 +64,11 @@
 	}
 	
 	var docs = {
-	  /*  "docs/AsciiDoc.asciidoc": "AsciiDoc",*/
 	    "docs/javascript.js": "JavaScript",
-	/*    "docs/clojure.clj": "Clojure",
-	    "docs/coffeescript.coffee": "Coffeescript",
-	    "docs/coldfusion.cfm": "ColdFusion",
-	    "docs/cpp.cpp": "C/C++",
-	    "docs/csharp.cs": "C#",*/
 	    "docs/css.css": "CSS",
-	  /*  "docs/dart.dart": "Dart",
-	    "docs/diff.diff": "Diff",
-	    "docs/glsl.glsl": "Glsl",
-	    "docs/golang.go": "Go",
-	    "docs/groovy.groovy": "Groovy",
-	    "docs/haml.haml": "Haml",
-	    "docs/Haxe.hx": "haXe",*/
 	    "docs/html.html": "HTML",
-	/*    "docs/jade.jade": "Jade",
-	    "docs/java.java": "Java",
-	    "docs/jsp.jsp": "JSP",
-	    "docs/json.json": "JSON",
-	    "docs/jsx.jsx": "JSX",
-	    "docs/latex.tex": {name: "LaTeX", wrapped: true},
-	    "docs/less.less": "LESS",
-	    "docs/lisp.lisp": "Lisp",
-	    "docs/liquid.liquid": "Liquid",
-	    "docs/lua.lua": "Lua",
-	    "docs/lucene.lucene": "Lucene",
-	    "docs/luapage.lp": "LuaPage",
-	    "docs/Makefile": "Makefile",
-	    "docs/markdown.md": {name: "Markdown", wrapped: true},
-	    "docs/objectivec.m": {name: "Objective-C"},
-	    "docs/ocaml.ml": "OCaml",
-	    "docs/OpenSCAD.scad": "OpenSCAD",
-	    "docs/perl.pl": "Perl",
-	    "docs/pgsql.pgsql": {name: "pgSQL", wrapped: true},*/
 	    "docs/php.php": "PHP",
-	   /* "docs/plaintext.txt": {name: "Plain Text", prepare: makeHuge, wrapped: true},
-	    "docs/powershell.ps1": "Powershell",
-	    "docs/python.py": "Python",
-	    "docs/ruby.rb": "Ruby",
-	    "docs/scala.scala": "Scala",
-	    "docs/scss.scss": "SCSS",
-	    "docs/sh.sh": "SH",
-	    "docs/stylus.styl": "Stylus",
-	    "docs/sql.sql": {name: "SQL", wrapped: true},
-	    "docs/svg.svg": "SVG",
-	    "docs/tcl.tcl": "Tcl",
-	    "docs/textile.textile": {name: "Textile", wrapped: true},
-	    "docs/typescript.ts": "Typescript",
-	    "docs/xml.xml": "XML",
-	    "docs/xquery.xq": "XQuery",
-	    "docs/yaml.yaml": "YAML",
-	    "docs/c9search.c9search_results": "C9 Search Results"*/
+	    "docs/toto.html": "toto.html",
 	};
 	
 	var ownSource = {

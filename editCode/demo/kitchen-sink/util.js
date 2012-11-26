@@ -184,7 +184,7 @@ exports.bindDropdown = function(id, callback, noInit) {
         callback(el.value);
         exports.saveOption(el);
     };
-
+    
     el.onchange = onChange;
     noInit || onChange();
 };
