@@ -39,7 +39,7 @@ var EditSession = require("ace/edit_session").EditSession;
 var UndoManager = require("ace/undomanager").UndoManager;
 var Renderer = require("ace/virtual_renderer").VirtualRenderer;
 var Editor = require("ace/editor").Editor;
-var MultiSelect = require("ace/multi_select").MultiSelect;
+//var MultiSelect = require("ace/multi_select").MultiSelect;
 
 exports.createSplitEditor = function(el) {
   if (typeof(el) == "string")
@@ -59,8 +59,8 @@ exports.createSplitEditor = function(el) {
     split.editor1 = split[1] = new Editor(new Renderer(e1, require("ace/theme/textmate")));
     split.splitter = s;
 
-    MultiSelect(split.editor0);
-    MultiSelect(split.editor1);
+    //MultiSelect(split.editor0);
+   // MultiSelect(split.editor1);
 
     s.ratio = 0.5;
 
