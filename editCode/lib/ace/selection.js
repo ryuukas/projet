@@ -495,7 +495,7 @@ var Selection = function(session) {
     *
     * Moves the cursor to the end of the line.
     **/
-    this.moveCursorLineEnd = function() {
+    /*this.moveCursorLineEnd = function() {
         var lead = this.lead;
         var lineEnd = this.session.getDocumentLastRowColumnPosition(lead.row, lead.column);
         if (this.lead.column == lineEnd.column) {
@@ -508,7 +508,7 @@ var Selection = function(session) {
         }
 
         this.moveCursorTo(lineEnd.row, lineEnd.column);
-    };
+    };*/
 
     /**
     * Selection.moveCursorFileEnd()

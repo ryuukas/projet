@@ -10,15 +10,15 @@ var event = require("./lib/event");
 //exports.commands = commands.defaultCommands.concat(commands.multiSelectCommands);
 
 // Todo: session.find or editor.findVolatile that returns range
-var Search = require("./search").Search;
-var search = new Search();
+//var Search = require("./search").Search;
+//var search = new Search();
 
-function find(session, needle, dir) {
+/*function find(session, needle, dir) {
     search.$options.wrap = true;
     search.$options.needle = needle;
     search.$options.backwards = dir == -1;
     return search.find(session);
-}
+}*/
 
 // extend EditSession
 var EditSession = require("./edit_session").EditSession;
@@ -446,7 +446,7 @@ var Editor = require("./editor").Editor;
     };
 
 
-    this.findAll = function(needle, options, additive) {
+    /*this.findAll = function(needle, options, additive) {
         options = options || {};
         options.needle = needle || options.needle;
         this.$search.set(options);
@@ -467,7 +467,7 @@ var Editor = require("./editor").Editor;
         this.$blockScrolling -= 1;
 
         return ranges.length;
-    };
+    };*/
 
 
     this.selectMoreLines = function(dir, skip) {
@@ -568,7 +568,7 @@ var Editor = require("./editor").Editor;
     };
 
 
-    this.alignCursors = function() {
+   /* this.alignCursors = function() {
         var session = this.session;
         var sel = session.multiSelect;
         var ranges = sel.ranges;
@@ -624,7 +624,7 @@ var Editor = require("./editor").Editor;
             this.renderer.updateCursor();
             this.renderer.updateBackMarkers();
         }
-    };
+    };*/
 
     this.$reAlignText = function(lines) {
         var isLeftAligned = true, isRightAligned = true;
