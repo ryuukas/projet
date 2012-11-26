@@ -4,7 +4,7 @@ define(function(require, exports, module) {
 require("./lib/fixoldbrowsers");
 
 var oop = require("./lib/oop");
-var lang = require("./lib/lang");
+//var lang = require("./lib/lang");
 var useragent = require("./lib/useragent");
 var TextInput = require("./keyboard/textinput").TextInput;
 var MouseHandler = require("./mouse/mouse_handler").MouseHandler;
@@ -1245,7 +1245,7 @@ var Editor = function(renderer, session) {
             session.indentRows(rows.first, rows.last, "\t");
         } else {
             var indentString;
-
+/*
             if (this.session.getUseSoftTabs()) {
                 var size        = session.getTabSize(),
                     position    = this.getCursorPosition(),
@@ -1254,7 +1254,7 @@ var Editor = function(renderer, session) {
 
                 indentString = lang.stringRepeat(" ", count);
             } else
-                indentString = "\t";
+ */               indentString = "\t";
             return this.insert(indentString);
         }
     };
