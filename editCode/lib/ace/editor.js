@@ -41,7 +41,7 @@ var MouseHandler = require("./mouse/mouse_handler").MouseHandler;
 var FoldHandler = require("./mouse/fold_handler").FoldHandler;
 var KeyBinding = require("./keyboard/keybinding").KeyBinding;
 var EditSession = require("./edit_session").EditSession;
-var Search = require("./search").Search;
+//var Search = require("./search").Search;
 var Range = require("./range").Range;
 var EventEmitter = require("./lib/event_emitter").EventEmitter;
 var CommandManager = require("./commands/command_manager").CommandManager;
@@ -77,9 +77,9 @@ var Editor = function(renderer, session) {
     new FoldHandler(this);
 
     this.$blockScrolling = 0;
-    this.$search = new Search().set({
+    /*this.$search = new Search().set({
         wrap: true
-    });
+    });*/
 
     this.setSession(session || new EditSession(""));
 };
@@ -516,7 +516,7 @@ var Editor = function(renderer, session) {
         }
 
         var re = this.$highlightSelectedWord && this.$getSelectionHighLightRegexp()
-        this.session.highlight(re);
+       // this.session.highlight(re);
         
         this._emit("changeSelection");
     };
@@ -544,13 +544,13 @@ var Editor = function(renderer, session) {
         if (!/^[\w\d]+$/.test(needle))
             return;
 
-        var re = this.$search.$assembleRegExp({
+        /*var re = this.$search.$assembleRegExp({
             wholeWord: true,
             caseSensitive: true,
             needle: needle
         });
 
-        return re;
+        return re;*/
     };
 
 
@@ -2028,7 +2028,7 @@ var Editor = function(renderer, session) {
      *
      * Replaces the first occurance of `options.needle` with the value in `replacement`.
      **/
-    this.replace = function(replacement, options) {
+    /*this.replace = function(replacement, options) {
         if (options)
             this.$search.set(options);
 
@@ -2046,7 +2046,7 @@ var Editor = function(renderer, session) {
         }
 
         return replaced;
-    };
+    };*/
 
     /**
      * Editor.replaceAll(replacement, options) 
@@ -2055,7 +2055,7 @@ var Editor = function(renderer, session) {
      *
      * Replaces all occurances of `options.needle` with the value in `replacement`.
      **/
-    this.replaceAll = function(replacement, options) {
+    /*this.replaceAll = function(replacement, options) {
         if (options) {
             this.$search.set(options);
         }
@@ -2081,9 +2081,9 @@ var Editor = function(renderer, session) {
         this.$blockScrolling -= 1;
 
         return replaced;
-    };
+    };*/
 
-    this.$tryReplace = function(range, replacement) {
+    /*this.$tryReplace = function(range, replacement) {
         var input = this.session.getTextRange(range);
         replacement = this.$search.replace(input, replacement);
         if (replacement !== null) {
@@ -2092,16 +2092,16 @@ var Editor = function(renderer, session) {
         } else {
             return null;
         }
-    };
+    };*/
 
     /** related to: Search.getOptions
      * Editor.getLastSearchOptions() -> Object
      * 
      * {:Search.getOptions} For more information on `options`, see [[Search `Search`]].
      **/
-    this.getLastSearchOptions = function() {
-        return this.$search.getOptions();
-    };
+   // this.getLastSearchOptions = function() {
+   //     return this.$search.getOptions();
+   // };
 
     /** related to: Search.find
      * Editor.find(needle, options, animate)
@@ -2111,7 +2111,7 @@ var Editor = function(renderer, session) {
      *
      * Attempts to find `needle` within the document. For more information on `options`, see [[Search `Search`]].
      **/
-    this.find = function(needle, options, animate) {
+   /* this.find = function(needle, options, animate) {
         if (!options)
             options = {};
 
@@ -2148,7 +2148,8 @@ var Editor = function(renderer, session) {
         else
             range.end = range.start;
         this.selection.setRange(range);
-    };
+    };*/
+    
 
     /** related to: Editor.find
      * Editor.findNext(options, animate)

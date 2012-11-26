@@ -41,7 +41,7 @@ var TextMode = require("./mode/text").Mode;
 var Range = require("./range").Range;
 var Document = require("./document").Document;
 var BackgroundTokenizer = require("./background_tokenizer").BackgroundTokenizer;
-var SearchHighlight = require("./search_highlight").SearchHighlight;
+//var SearchHighlight = require("./search_highlight").SearchHighlight;
 
 /**
  * class EditSession
@@ -735,13 +735,13 @@ var EditSession = function(text, mode) {
         return inFront ? this.$frontMarkers : this.$backMarkers;
     };
 
-    this.highlight = function(re) {
+    /*this.highlight = function(re) {
         if (!this.$searchHighlight) {
             var highlight = new SearchHighlight(null, "ace_selected-word", "text");
             this.$searchHighlight = this.addDynamicMarker(highlight);
         }
         this.$searchHighlight.setRegexp(re);
-    }
+    }*/
     
     // experimental
     this.highlightLines = function(startRow, endRow, clazz, inFront) {
