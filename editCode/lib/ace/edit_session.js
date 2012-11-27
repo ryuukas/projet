@@ -295,7 +295,7 @@ var EditSession = function(text, mode) {
     *
     **/
     this.setValue = function(text) {
-    alert('lol');
+
         this.doc.setValue(text);
         this.selection.moveCursorTo(0, 0);
         this.selection.clearSelection();
