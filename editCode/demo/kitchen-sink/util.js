@@ -134,38 +134,13 @@ exports.saveOption = function(el, val) {
     if (!el.onchange && !el.onclick)
         return;
 
-  //  if ("checked" in el) {
-  //      if (val !== undefined)
-  //          el.checked = val;
-//
-  //      localStorage && localStorage.f(el.id, el.checked ? 1 : 0);
-   // }
     else {
     	if (val !== undefined)
             el.value = val;
        localStorage && localStorage.setItem(el.id, el.value);
     }
 };
-/*
-exports.bindCheckbox = function(id, callback, noInit) {
-    if (typeof id == "string")
-        var el = document.getElementById(id);
-    else {
-        var el = id;
-        id = el.id;
-    }
-    var el = document.getElementById(id);
-    if (localStorage && localStorage.getItem(id))
-        el.checked = localStorage.getItem(id) == "1";
 
-    var onCheck = function() {
-        callback(!!el.checked);
-        exports.saveOption(el);
-    };
-    el.onclick = onCheck;
-    noInit || onCheck();
-};
-*/
 exports.bindDropdown = function(id, callback, noInit) {
 	if (typeof id == "string")
         var el = document.getElementById(id);
@@ -175,10 +150,8 @@ exports.bindDropdown = function(id, callback, noInit) {
     }
     if (localStorage && localStorage.getItem(id))
         el.value = localStorage.getItem(id);
-    var $target = $(event.target);
     
     var onClick = function(){
-	 //   alert($("li", $(this)).html());
 		$("li").click(
 		    function(event){
 		        el.value=$(this).html();
@@ -187,9 +160,6 @@ exports.bindDropdown = function(id, callback, noInit) {
 		        exports.saveOption(el);
 		    }
 		);
-		//alert(el.value);
-		//el.value="toto.js";
-
     }
     el.onclick = onClick;
     
@@ -204,12 +174,8 @@ exports.bindDropdown = function(id, callback, noInit) {
 };
 
 exports.fillDropdown = function(el, values) {
-//    if (typeof el == "string")
-  //      el = document.getElementById(el);
     dropdown(values).forEach(function(e) {
     	$(el).append(e);
-    //   el.append(e);
-        // el.appendChild(e);
     });
 };
 

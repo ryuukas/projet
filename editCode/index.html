@@ -9,24 +9,36 @@
 </head>
 <body>
 <div id="optionsPanel" style="position:absolute;height:100%">
-  <div style="position: absolute; overflow: hidden; top:80px; bottom:0">
-  <div style="width: 120%; height:100%; overflow-y: scroll">
-  <ul id="doc" size="1"></ul>
-  <ul id="mode" size="1"></ul>
-
-  </div>
-  </div>
+	<div style="position: absolute; overflow: hidden; top:80px; bottom:0">
+		<div style="width: 120%; height:100%; overflow-y: scroll">
+			<ul id="doc" size="1"></ul>
+			<ul id="mode" size="1"></ul>
+		
+		</div>
+	</div>
 </div>
-  
+ <button type="button" onclick="toto()">looool</button>
 <div id="editor" style=""></div>
 
 <script type="text/javascript">
-  var require = {
-      baseUrl: window.location.protocol + "//" + window.location.host + window.location.pathname.split("/").slice(0, -1).join("/"), // Url de base http://localhost:8888/editCode/
-      paths: {
-          ace: "lib/ace"
-      }
-  };
+	var require = {
+	  baseUrl: window.location.protocol + "//" + window.location.host + window.location.pathname.split("/").slice(0, -1).join("/"), // Url de base http://localhost:8888/editCode/
+	  paths: {
+	      ace: "lib/ace"
+	  }
+	};
+
+	var docs = {
+	    "docs/javascript.js": "JavaScript",
+	    "docs/css.css": "CSS",
+	    "docs/html.html": "HTML",
+	    "docs/php.php": "PHP",
+	};
+	
+	
+	function toto(){
+		//alert($("#editor").html());
+	}
 </script>
 <script src="demo/kitchen-sink/require.js" data-main="demo/kitchen-sink/demo" type="text/javascript"></script>
 </body>
