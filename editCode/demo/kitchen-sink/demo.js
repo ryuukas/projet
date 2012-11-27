@@ -74,7 +74,7 @@ define(function(require, exports, module) {
 	//fillDropdown(modeEl, modelist.modes);
 	var modesByName = modelist.modesByName;
 	bindDropdown("mode", function(value) {
-	    env.editor.session.setMode(modesByName[value].mode || modesByName.text.mode);
+	  //env.editor.session.setMode(modesByName[value].mode || modesByName.text.mode);
 	    env.editor.session.modeName = value;
 	});
 	
