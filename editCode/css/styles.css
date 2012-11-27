@@ -36,3 +36,12 @@ body {
 #controls td + td {
     text-align: left;
 }
+
+.dossier{
+	color:green;
+}
+
+.sousfichier{
+	margin-left: 10px;
+	color:yellow;
+}

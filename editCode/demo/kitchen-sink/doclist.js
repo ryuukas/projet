@@ -62,16 +62,7 @@
 	        txt += txt;
 	    return txt;
 	}
-	
-	var docs = {
-	    "docs/javascript.js": "JavaScript",
-	    "docs/css.css": "CSS",
-	    "docs/html.html": "HTML",
-	    "docs/php.php": "PHP",
-	//    "docs/toto.html": "toto.html",
-	  //  "docs/toto.js": "toto.js",
-	};
-	
+		
 	var ownSource = {
 	    /* filled from require*/
 	};
@@ -91,6 +82,11 @@
 	    }
 	} catch(e) {}
 	
+	function strpos (haystack, needle, offset) {
+		var i = (haystack + '').indexOf(needle, (offset || 0));
+		return i === -1 ? false : i;
+	}
+	
 	function prepareDocList(docs) {
 	    var list = [];
 	    for (var path in docs) {
@@ -99,6 +95,10 @@
 	            doc = {name: doc || path};
 	
 	        doc.path = path;
+	        var point = strpos(doc.path,".");
+	        if(point==""){
+		        doc.name = "dossier : "+doc.name;
+	        }
 	        doc.desc = doc.name.replace(/^(ace|docs|demo|build)\//, "");
 	        if (doc.desc.length > 18)
 	            doc.desc = doc.desc.slice(0, 7) + ".." + doc.desc.slice(-9);

@@ -6,6 +6,12 @@
     <meta name="author" content="Fabian Jakobs">
     <link rel="stylesheet" href="css/styles.css" type="text/css" media="screen" charset="utf-8">
 <script src="js/jquery-1.7.1.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+	function totolol(){
+		var lol = document.getElementById("editor").value;
+		alert(lol);
+	}
+</script>
 </head>
 <body>
 <div id="optionsPanel" style="position:absolute;height:100%">
@@ -17,7 +23,7 @@
 		</div>
 	</div>
 </div>
- <button type="button" onclick="toto()">looool</button>
+ <button type="button" onclick="totolol()">looool</button>
 <div id="editor" style=""></div>
 
 <script type="text/javascript">
@@ -29,16 +35,15 @@
 	};
 
 	var docs = {
-	    "docs/javascript.js": "JavaScript",
-	    "docs/css.css": "CSS",
-	    "docs/html.html": "HTML",
-	    "docs/php.php": "PHP",
+	    "docs/javascript.js": "javascript.js",
+	    "docs/css.css": "css.css",
+	    "docs/html.html": "html.html",
+	    "docs/php.php": "php.php",
+	    "docs/lol/": "lol",
+	    "docs/lol/html.html": "lol/html.html",
+	    "docs/lolilol/": "lolilol",
+	    "docs/lolilol/php.php": "lolilol/php.php",
 	};
-	
-	
-	function toto(){
-		//alert($("#editor").html());
-	}
 </script>
 <script src="demo/kitchen-sink/require.js" data-main="demo/kitchen-sink/demo" type="text/javascript"></script>
 </body>

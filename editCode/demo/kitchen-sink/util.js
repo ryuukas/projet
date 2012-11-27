@@ -152,8 +152,16 @@ exports.bindDropdown = function(id, callback, noInit) {
         el.value = localStorage.getItem(id);
     
     var onClick = function(){
-		$("li").click(
-		    function(event){
+		$(".fichier").click(
+		    function(event){	
+		        el.value=$(this).html();
+		        event.stopPropagation();
+			    callback(el.value);
+		        exports.saveOption(el);
+		    }
+		);
+		$(".sousfichier").click(
+		    function(event){	
 		        el.value=$(this).html();
 		        event.stopPropagation();
 			    callback(el.value);
@@ -194,13 +202,26 @@ function elt(tag, attributes, content) {
     return el;
 }
 
+function strpos (haystack, needle, offset) {
+		var i = (haystack + '').indexOf(needle, (offset || 0));
+		return i === -1 ? false : i;
+	}
+
 function optgroup(values) {
     return values.map(function(item) {
         if (typeof item == "string")
             item = {name: item, desc: item};
        if (typeof item == "string")
           item = {name: item, desc: item};
-        return elt("li", {value: item.name}, item.desc);
+       var point = strpos(item.name,".");
+       var sousFichier = strpos(item.name,"/");
+	   if(point==""){ 
+       		return elt("li", {value: item.name, class: "dossier"}, item.desc);
+       }else if(sousFichier != false){
+	       	return elt("li", {value: item.name, class: "sousfichier"}, item.desc);
+       }else{
+	       	return elt("li", {value: item.name, class: "fichier"}, item.desc);
+       }
     });
 }
 
