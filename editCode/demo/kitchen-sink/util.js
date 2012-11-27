@@ -39,7 +39,7 @@ var EditSession = require("ace/edit_session").EditSession;
 var UndoManager = require("ace/undomanager").UndoManager;
 var Renderer = require("ace/virtual_renderer").VirtualRenderer;
 var Editor = require("ace/editor").Editor;
-//var MultiSelect = require("ace/multi_select").MultiSelect;
+var MultiSelect = require("ace/multi_select").MultiSelect;
 
 exports.createSplitEditor = function(el) {
   if (typeof(el) == "string")
@@ -59,7 +59,7 @@ exports.createSplitEditor = function(el) {
     split.editor1 = split[1] = new Editor(new Renderer(e1, require("ace/theme/textmate")));
     split.splitter = s;
 
-    //MultiSelect(split.editor0);
+  //  MultiSelect(split.editor0);
    // MultiSelect(split.editor1);
 
     s.ratio = 0.5;
@@ -123,7 +123,6 @@ exports.createSplitEditor = function(el) {
     return split;
 };
 
-
 /***************************/
 exports.stripLeadingComments = function(str) {
     if(str.slice(0,2)=='/*') {
@@ -185,7 +184,7 @@ exports.bindDropdown = function(id, callback, noInit) {
         callback(el.value);
         exports.saveOption(el);
     };
-    
+
     el.onchange = onChange;
     noInit || onChange();
 };
@@ -206,9 +205,9 @@ function elt(tag, attributes, content) {
     } else if (content) {
         content.forEach(function(ch) {
             el.appendChild(ch);
-           // alert(ch.textContent);
         });
     }
+
     for (var i in attributes)
         el.setAttribute(i, attributes[i]);
     return el;

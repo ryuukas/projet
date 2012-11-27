@@ -40,6 +40,7 @@ var UndoManager = require("ace/undomanager").UndoManager;
 var Renderer = require("ace/virtual_renderer").VirtualRenderer;
 var Editor = require("ace/editor").Editor;
 var MultiSelect = require("ace/multi_select").MultiSelect;
+var util = require("./util").util;
 
 exports.createSplitEditor = function(el) {
   if (typeof(el) == "string")
@@ -217,14 +218,14 @@ function optgroup(values) {
     return values.map(function(item) {
         if (typeof item == "string")
             item = {name: item, desc: item};
-        return elt("option", {value: item.name}, item.desc);
+        return elt("option", {value: item.name, onClick: "util.loadDoc('doc',)"}, item.desc);
     });
 }
 
 function dropdown(values) {
     if (Array.isArray(values))
         return optgroup(values);
-
+        
     return Object.keys(values).map(function(i) {
         return elt("optgroup", {"label": i}, optgroup(values[i]));
     });

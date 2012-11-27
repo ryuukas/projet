@@ -127,6 +127,7 @@ var EditSession = function(text, mode) {
     };
 
     this.onChangeFold = function(e) {
+    alert('lol');
         var fold = e.data;
         this.$resetRowCache(fold.start.row);
     };

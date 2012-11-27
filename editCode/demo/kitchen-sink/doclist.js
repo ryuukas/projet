@@ -110,6 +110,7 @@
 	}
 	
 	function loadDoc(name, callback) {
+	
 	    var doc = fileCache[name];
 	    if (!doc)
 	        return callback(null);
