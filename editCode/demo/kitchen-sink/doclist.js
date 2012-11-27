@@ -68,7 +68,8 @@
 	    "docs/css.css": "CSS",
 	    "docs/html.html": "HTML",
 	    "docs/php.php": "PHP",
-	    "docs/toto.html": "toto.html",
+	//    "docs/toto.html": "toto.html",
+	  //  "docs/toto.js": "toto.js",
 	};
 	
 	var ownSource = {
@@ -135,15 +136,11 @@
 	module.exports = {
 	    fileCache: fileCache,
 	    docs: prepareDocList(docs),
-	//    ownSource: prepareDocList(ownSource),
-	//    hugeDocs: prepareDocList(hugeDocs),
 	    initDoc: initDoc,
 	    loadDoc: loadDoc
 	};
 	module.exports.all = {
 	    "Mode Examples": module.exports.docs,
-	  //  "Huge documents": module.exports.hugeDocs,
-	   // "own source": module.exports.ownSource
 	};
 
 });

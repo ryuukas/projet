@@ -38,8 +38,12 @@ var dom = require("ace/lib/dom");
 var EditSession = require("ace/edit_session").EditSession;
 var UndoManager = require("ace/undomanager").UndoManager;
 var Renderer = require("ace/virtual_renderer").VirtualRenderer;
+<<<<<<< HEAD
 var Editor = require("ace/editor").Editor;
 var MultiSelect = require("ace/multi_select").MultiSelect;
+=======
+var Editor = require("ace/editor").Editor;	
+>>>>>>> gestion des fichiers click
 
 exports.createSplitEditor = function(el) {
   if (typeof(el) == "string")
@@ -59,8 +63,13 @@ exports.createSplitEditor = function(el) {
     split.editor1 = split[1] = new Editor(new Renderer(e1, require("ace/theme/textmate")));
     split.splitter = s;
 
+<<<<<<< HEAD
   //  MultiSelect(split.editor0);
    // MultiSelect(split.editor1);
+=======
+ //   MultiSelect(split.editor0);
+ //   MultiSelect(split.editor1);
+>>>>>>> gestion des fichiers click
 
     s.ratio = 0.5;
 
@@ -116,7 +125,6 @@ exports.createSplitEditor = function(el) {
     };
 
 
-
     event.addListener(s, "mousedown", split.onMouseDown);
     event.addListener(window, "resize", split.resize);
     split.resize();
@@ -137,20 +145,19 @@ exports.saveOption = function(el, val) {
     if (!el.onchange && !el.onclick)
         return;
 
-    if ("checked" in el) {
-        if (val !== undefined)
-            el.checked = val;
-
-        localStorage && localStorage.setItem(el.id, el.checked ? 1 : 0);
-    }
+  //  if ("checked" in el) {
+  //      if (val !== undefined)
+  //          el.checked = val;
+//
+  //      localStorage && localStorage.f(el.id, el.checked ? 1 : 0);
+   // }
     else {
-        if (val !== undefined)
+    	if (val !== undefined)
             el.value = val;
-
-        localStorage && localStorage.setItem(el.id, el.value);
+       localStorage && localStorage.setItem(el.id, el.value);
     }
 };
-
+/*
 exports.bindCheckbox = function(id, callback, noInit) {
     if (typeof id == "string")
         var el = document.getElementById(id);
@@ -169,9 +176,9 @@ exports.bindCheckbox = function(id, callback, noInit) {
     el.onclick = onCheck;
     noInit || onCheck();
 };
-
+*/
 exports.bindDropdown = function(id, callback, noInit) {
-    if (typeof id == "string")
+	if (typeof id == "string")
         var el = document.getElementById(id);
     else {
         var el = id;
@@ -179,22 +186,41 @@ exports.bindDropdown = function(id, callback, noInit) {
     }
     if (localStorage && localStorage.getItem(id))
         el.value = localStorage.getItem(id);
+    var $target = $(event.target);
+    
+    var onClick = function(){
+	 //   alert($("li", $(this)).html());
+		$("li").click(
+		    function(event){
+		        el.value=$(this).html();
+		        event.stopPropagation();
+			    callback(el.value);
+		        exports.saveOption(el);
+		    }
+		);
+		//alert(el.value);
+		//el.value="toto.js";
 
+    }
+    el.onclick = onClick;
+    
     var onChange = function() {
-        callback(el.value);
+	    callback(el.value);
         exports.saveOption(el);
     };
 
     el.onchange = onChange;
     noInit || onChange();
+ //  noInit || onClick();
 };
 
 exports.fillDropdown = function(el, values) {
-    if (typeof el == "string")
-        el = document.getElementById(el);
-
+//    if (typeof el == "string")
+  //      el = document.getElementById(el);
     dropdown(values).forEach(function(e) {
-        el.appendChild(e);
+    	$(el).append(e);
+    //   el.append(e);
+        // el.appendChild(e);
     });
 };
 
@@ -215,8 +241,13 @@ function elt(tag, attributes, content) {
 
 function optgroup(values) {
     return values.map(function(item) {
+<<<<<<< HEAD
         if (typeof item == "string")
             item = {name: item, desc: item};
+=======
+       if (typeof item == "string")
+          item = {name: item, desc: item};
+>>>>>>> gestion des fichiers click
         return elt("li", {value: item.name}, item.desc);
     });
 }
@@ -226,7 +257,8 @@ function dropdown(values) {
         return optgroup(values);
 
     return Object.keys(values).map(function(i) {
-        return elt("li", {"label": i}, optgroup(values[i]));
+	 	return optgroup(values[i]);
+	 //  return elt("ul", {"label": "toto"}, optgroup(values[i]));
     });
 }
 

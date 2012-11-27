@@ -33,59 +33,10 @@ define(function(require, exports, module) {
 	};
 	
 	var modesByName = {
-/*	    asciidoc:   ["AsciiDoc"     , "asciidoc"],
-	    c9search:   ["C9Search"     , "c9search_results"],
-	    coffee:     ["CoffeeScript" , "^Cakefile|coffee|cf"],
-	    coldfusion: ["ColdFusion"   , "cfm"],
-	    csharp:     ["C#"           , "cs"],*/
 	    css:        ["CSS"          , "css"],
-/*	    dart:       ["Dart"         , "dart"],
-	    diff:       ["Diff"         , "diff|patch"],
-	    glsl:       ["Glsl"         , "glsl|frag|vert"],
-	    golang:     ["Go"           , "go"],
-	    groovy:     ["Groovy"       , "groovy"],
-	    haxe:       ["haXe"         , "hx"],
-	    haml:       ["HAML"         , "haml"],*/
 	    html:       ["HTML"         , "htm|html|xhtml"],
-	/*    c_cpp:      ["C/C++"        , "c|cc|cpp|cxx|h|hh|hpp"],
-	    clojure:    ["Clojure"      , "clj"],
-	    jade:       ["Jade"         , "jade"],
-	    java:       ["Java"         , "java"],
-	    jsp:        ["JSP"          , "jsp"],*/
 	    javascript: ["JavaScript"   , "js"],
-/*	    json:       ["JSON"         , "json"],
-	    jsx:        ["JSX"          , "jsx"],
-	    latex:      ["LaTeX"        , "latex|tex|ltx|bib"],
-	    less:       ["LESS"         , "less"],
-	    lisp:       ["Lisp"         , "lisp|scm|rkt"],
-	    liquid:     ["Liquid"       , "liquid"],
-	    lua:        ["Lua"          , "lua"],
-	    luapage:    ["LuaPage"      , "lp"], // http://keplerproject.github.com/cgilua/manual.html#templates
-	    lucene:     ["Lucene"       , "lucene"],
-	    makefile:   ["Makefile"     , "^GNUmakefile|^makefile|^Makefile|^OCamlMakefile|make"],
-	    markdown:   ["Markdown"     , "md|markdown"],
-	    objectivec: ["Objective-C"  , "m"],
-	    ocaml:      ["OCaml"        , "ml|mli"],
-	    perl:       ["Perl"         , "pl|pm"],
-	    pgsql:      ["pgSQL"        , "pgsql"],*/
 	    php:        ["PHP"          , "php|phtml"],
-	/*    powershell: ["Powershell"   , "ps1"],
-	    python:     ["Python"       , "py"],
-	    ruby:       ["Ruby"         , "ru|gemspec|rake|rb"],
-	    scad:       ["OpenSCAD"     , "scad"],
-	    scala:      ["Scala"        , "scala"],
-	    scss:       ["SCSS"         , "scss|sass"],
-	    sh:         ["SH"           , "sh|bash|bat"],
-	    sql:        ["SQL"          , "sql"],
-	    stylus:     ["Stylus"       , "styl|stylus"],
-	    svg:        ["SVG"          , "svg"],
-	    tcl:        ["Tcl"          , "tcl"],
-	    text:       ["Text"         , "txt"],
-	    textile:    ["Textile"      , "textile"],
-	    typescript: ["Typescript"   , "typescript|ts|str"],
-	    xml:        ["XML"          , "xml|rdf|rss|wsdl|xslt|atom|mathml|mml|xul|xbl"],
-	    xquery:     ["XQuery"       , "xq"],
-	    yaml:       ["YAML"         , "yaml"]*/
 	};
 	
 	for (var name in modesByName) {

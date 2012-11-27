@@ -71,7 +71,7 @@ define(function(require, exports, module) {
 	
 	fillDropdown(docEl, doclist.all);
 	
-	fillDropdown(modeEl, modelist.modes);
+	//fillDropdown(modeEl, modelist.modes);
 	var modesByName = modelist.modesByName;
 	bindDropdown("mode", function(value) {
 	    env.editor.session.setMode(modesByName[value].mode || modesByName.text.mode);
@@ -79,11 +79,11 @@ define(function(require, exports, module) {
 	});
 	
 	bindDropdown("doc", function(name) {
+		// name = nom du fichier | session = la page
 	    doclist.loadDoc(name, function(session) {
 	        if (!session)
 	            return;
 	        session = env.split.setSession(session);
-	       // updateUIEditorOptions();
 	        env.editor.focus();
 	    });
 	});
@@ -91,52 +91,7 @@ define(function(require, exports, module) {
 	function updateUIEditorOptions() {
 	 
 	}
-	bindCheckbox("select_style", function(checked) {
-	    env.editor.setSelectionStyle(checked ? "line" : "text");
-	});
-	
-	bindCheckbox("highlight_active", function(checked) {
-	    env.editor.setHighlightActiveLine(checked);
-	});
-	
-	bindCheckbox("show_hidden", function(checked) {
-	    env.editor.setShowInvisibles(checked);
-	});
-	
-	bindCheckbox("display_indent_guides", function(checked) {
-	    env.editor.setDisplayIndentGuides(checked);
-	});
-	
-	bindCheckbox("show_gutter", function(checked) {
-	//    env.editor.renderer.setShowGutter(checked);
-	});
-	
-	bindCheckbox("show_print_margin", function(checked) {
-	//    env.editor.renderer.setShowPrintMargin(checked);
-	});
-	
-	bindCheckbox("highlight_selected_word", function(checked) {
-	    env.editor.setHighlightSelectedWord(checked);
-	});
-	
-	bindCheckbox("show_hscroll", function(checked) {
-	//    env.editor.renderer.setHScrollBarAlwaysVisible(checked);
-	});
-	
-	bindCheckbox("animate_scroll", function(checked) {
-	    env.editor.setAnimatedScroll(checked);
-	});
-	
-	bindCheckbox("soft_tab", function(checked) {
-	    env.editor.session.setUseSoftTabs(checked);
-	});
-	
-	bindCheckbox("enable_behaviours", function(checked) {
-	    env.editor.setBehavioursEnabled(checked);
-	});
-	
-	bindCheckbox("fade_fold_widgets", function(checked) {
-	    env.editor.setFadeFoldWidgets(checked);
-	});
+
+
 });
 
