@@ -425,6 +425,7 @@ var Editor = function(renderer, session) {
      * 
      **/
     this.onDocumentChange = function(e) {
+    //alert('lol');
         var delta = e.data;
         var range = delta.range;
         var lastRow;
