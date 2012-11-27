@@ -1,11 +1,41 @@
+/* ***** BEGIN LICENSE BLOCK *****
+ * Distributed under the BSD license:
+ *
+ * Copyright (c) 2010, Ajax.org B.V.
+ * All rights reserved.
+ * 
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *     * Redistributions of source code must retain the above copyright
+ *       notice, this list of conditions and the following disclaimer.
+ *     * Redistributions in binary form must reproduce the above copyright
+ *       notice, this list of conditions and the following disclaimer in the
+ *       documentation and/or other materials provided with the distribution.
+ *     * Neither the name of Ajax.org B.V. nor the
+ *       names of its contributors may be used to endorse or promote products
+ *       derived from this software without specific prior written permission.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL AJAX.ORG B.V. BE LIABLE FOR ANY
+ * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
 define(function(require, exports, module) {
 "use strict";
 
 require("./lib/fixoldbrowsers");
 
 var oop = require("./lib/oop");
-//var lang = require("./lib/lang");
-//var useragent = require("./lib/useragent");
+var lang = require("./lib/lang");
+var useragent = require("./lib/useragent");
 var TextInput = require("./keyboard/textinput").TextInput;
 var MouseHandler = require("./mouse/mouse_handler").MouseHandler;
 var FoldHandler = require("./mouse/fold_handler").FoldHandler;
@@ -16,7 +46,6 @@ var Range = require("./range").Range;
 var EventEmitter = require("./lib/event_emitter").EventEmitter;
 var CommandManager = require("./commands/command_manager").CommandManager;
 var defaultCommands = require("./commands/default_commands").commands;
-
 
 /**
  * class Editor
@@ -38,7 +67,7 @@ var Editor = function(renderer, session) {
     this.container = container;
     this.renderer = renderer;
 
-    this.commands = new CommandManager("mac", defaultCommands); //useragent.isMac ? "mac" : "win", defaultCommands);
+    this.commands = new CommandManager(useragent.isMac ? "mac" : "win", defaultCommands);
     this.textInput  = new TextInput(renderer.getTextAreaContainer(), this);
     this.renderer.textarea = this.textInput.getElement();
     this.keyBinding = new KeyBinding(this);
@@ -48,9 +77,9 @@ var Editor = function(renderer, session) {
     new FoldHandler(this);
 
     this.$blockScrolling = 0;
-    //this.$search = new Search().set({
-    //    wrap: true
-    //});
+    /*this.$search = new Search().set({
+        wrap: true
+    });*/
 
     this.setSession(session || new EditSession(""));
 };
@@ -487,7 +516,7 @@ var Editor = function(renderer, session) {
         }
 
         var re = this.$highlightSelectedWord && this.$getSelectionHighLightRegexp()
-        this.session.highlight(re);
+       // this.session.highlight(re);
         
         this._emit("changeSelection");
     };
@@ -515,13 +544,13 @@ var Editor = function(renderer, session) {
         if (!/^[\w\d]+$/.test(needle))
             return;
 
-        //var re = this.$search.$assembleRegExp({
-        //    wholeWord: true,
-        //    caseSensitive: true,
-        //    needle: needle
-        //});
+        /*var re = this.$search.$assembleRegExp({
+            wholeWord: true,
+            caseSensitive: true,
+            needle: needle
+        });
 
-        //return re;
+        return re;*/
     };
 
 
@@ -1246,7 +1275,7 @@ var Editor = function(renderer, session) {
             session.indentRows(rows.first, rows.last, "\t");
         } else {
             var indentString;
-/*
+
             if (this.session.getUseSoftTabs()) {
                 var size        = session.getTabSize(),
                     position    = this.getCursorPosition(),
@@ -1255,7 +1284,7 @@ var Editor = function(renderer, session) {
 
                 indentString = lang.stringRepeat(" ", count);
             } else
- */               indentString = "\t";
+                indentString = "\t";
             return this.insert(indentString);
         }
     };
@@ -2026,7 +2055,7 @@ var Editor = function(renderer, session) {
      *
      * Replaces all occurances of `options.needle` with the value in `replacement`.
      **/
-   /* this.replaceAll = function(replacement, options) {
+    /*this.replaceAll = function(replacement, options) {
         if (options) {
             this.$search.set(options);
         }
@@ -2082,7 +2111,7 @@ var Editor = function(renderer, session) {
      *
      * Attempts to find `needle` within the document. For more information on `options`, see [[Search `Search`]].
      **/
-    /*this.find = function(needle, options, animate) {
+   /* this.find = function(needle, options, animate) {
         if (!options)
             options = {};
 
@@ -2120,6 +2149,7 @@ var Editor = function(renderer, session) {
             range.end = range.start;
         this.selection.setRange(range);
     };*/
+    
 
     /** related to: Editor.find
      * Editor.findNext(options, animate)

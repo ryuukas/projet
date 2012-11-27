@@ -1,8 +1,55 @@
+/* ***** BEGIN LICENSE BLOCK *****
+ * Distributed under the BSD license:
+ *
+ * Copyright (c) 2010, Ajax.org B.V.
+ * All rights reserved.
+ * 
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *     * Redistributions of source code must retain the above copyright
+ *       notice, this list of conditions and the following disclaimer.
+ *     * Redistributions in binary form must reproduce the above copyright
+ *       notice, this list of conditions and the following disclaimer in the
+ *       documentation and/or other materials provided with the distribution.
+ *     * Neither the name of Ajax.org B.V. nor the
+ *       names of its contributors may be used to endorse or promote products
+ *       derived from this software without specific prior written permission.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL AJAX.ORG B.V. BE LIABLE FOR ANY
+ * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
 define(function(require, exports, module) {
 "use strict";
 
 var oop = require("./lib/oop");
 var EventEmitter = require("./lib/event_emitter").EventEmitter;
+
+/**
+ * class Anchor
+ *
+ * Defines the floating pointer in the document. Whenever text is inserted or deleted before the cursor, the position of the cursor is updated
+ *
+ **/
+
+/**
+ * new Anchor(doc, row, column)
+ * - doc (Document): The document to associate with the anchor
+ * - row (Number): The starting row position
+ * - column (Number): The starting column position
+ *
+ * Creates a new `Anchor` and associates it with a document.
+ *
+ **/
 
 var Anchor = exports.Anchor = function(doc, row, column) {
     this.document = doc;
@@ -19,16 +66,42 @@ var Anchor = exports.Anchor = function(doc, row, column) {
 (function() {
 
     oop.implement(this, EventEmitter);
+    
+    /**
+     * Anchor.getPosition() -> Object
+     *
+     * Returns an object identifying the `row` and `column` position of the current anchor.
+     *
+     **/
 
     this.getPosition = function() {
         return this.$clipPositionToDocument(this.row, this.column);
     };
+ 
+     /**
+     * Anchor.getDocument() -> Document
+     *
+     * Returns the current document.
+     *
+     **/
         
     this.getDocument = function() {
         return this.document;
     };
     
- 
+     /**
+     * Anchor@change(e)
+     * - e (Object): An object containing information about the anchor position. It has two properties:
+       * `old`: An object describing the old Anchor position
+       * `value`: An object describing the new Anchor position  
+     Both of these objects have a `row` and `column` property corresponding to the position.
+     *
+     * Fires whenever the anchor position changes.
+     *
+     * Events that can trigger this function include [[Anchor.setPosition `setPosition()`]].
+     *
+     **/
+
     this.onChange = function(e) {
         var delta = e.data;
         var range = delta.range;
@@ -94,6 +167,16 @@ var Anchor = exports.Anchor = function(doc, row, column) {
         this.setPosition(row, column, true);
     };
 
+     /**
+     * Anchor.setPosition(row, column, noClip)
+     * - row (Number): The row index to move the anchor to
+     * - column (Number): The column index to move the anchor to
+     * - noClip (Boolean): Identifies if you want the position to be clipped
+     *
+     * Sets the anchor position to the specified row and column. If `noClip` is `true`, the position is not clipped.
+     *
+     **/
+
     this.setPosition = function(row, column, noClip) {
         var pos;
         if (noClip) {
@@ -122,10 +205,26 @@ var Anchor = exports.Anchor = function(doc, row, column) {
         });
     };
     
+    /**
+     * Anchor.detach()
+     *
+     * When called, the `'change'` event listener is removed.
+     *
+     **/
+
     this.detach = function() {
         this.document.removeEventListener("change", this.$onChange);
     };
     
+    /** internal, hide
+     * Anchor.clipPositionToDocument(row, column)
+     * - row (Number): The row index to clip the anchor to
+     * - column (Number): The column index to clip the anchor to
+     *
+     * Clips the anchor position to the specified row and column.
+     *
+     **/
+
     this.$clipPositionToDocument = function(row, column) {
         var pos = {};
     

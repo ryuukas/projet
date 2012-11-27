@@ -38,9 +38,13 @@ var globalRequire = typeof require != "undefined" && require;
  
 define(function (require, exports, module) {
     "use strict";
+    
     exports.load = function (name, req, onLoad, config) {
-	    // appel de chrome.css, editor.css et textemate.css
-	    require("../lib/net").get(req.toUrl(name), onLoad);
+        //Using special require.nodeRequire, something added by r.js.
+        if (globalRequire && globalRequire.nodeRequire)
+            onLoad(globalRequire.nodeRequire('fs').readFileSync(req.toUrl(name), 'utf8'));
+        else
+            require("../lib/net").get(req.toUrl(name), onLoad);
     };
 });
 

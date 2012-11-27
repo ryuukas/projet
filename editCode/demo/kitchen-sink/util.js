@@ -38,12 +38,8 @@ var dom = require("ace/lib/dom");
 var EditSession = require("ace/edit_session").EditSession;
 var UndoManager = require("ace/undomanager").UndoManager;
 var Renderer = require("ace/virtual_renderer").VirtualRenderer;
-<<<<<<< HEAD
 var Editor = require("ace/editor").Editor;
-var MultiSelect = require("ace/multi_select").MultiSelect;
-=======
 var Editor = require("ace/editor").Editor;	
->>>>>>> gestion des fichiers click
 
 exports.createSplitEditor = function(el) {
   if (typeof(el) == "string")
@@ -63,13 +59,6 @@ exports.createSplitEditor = function(el) {
     split.editor1 = split[1] = new Editor(new Renderer(e1, require("ace/theme/textmate")));
     split.splitter = s;
 
-<<<<<<< HEAD
-  //  MultiSelect(split.editor0);
-   // MultiSelect(split.editor1);
-=======
- //   MultiSelect(split.editor0);
- //   MultiSelect(split.editor1);
->>>>>>> gestion des fichiers click
 
     s.ratio = 0.5;
 
@@ -241,13 +230,10 @@ function elt(tag, attributes, content) {
 
 function optgroup(values) {
     return values.map(function(item) {
-<<<<<<< HEAD
         if (typeof item == "string")
             item = {name: item, desc: item};
-=======
        if (typeof item == "string")
           item = {name: item, desc: item};
->>>>>>> gestion des fichiers click
         return elt("li", {value: item.name}, item.desc);
     });
 }

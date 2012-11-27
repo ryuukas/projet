@@ -1,10 +1,40 @@
+/* ***** BEGIN LICENSE BLOCK *****
+ * Distributed under the BSD license:
+ *
+ * Copyright (c) 2010, Ajax.org B.V.
+ * All rights reserved.
+ * 
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *     * Redistributions of source code must retain the above copyright
+ *       notice, this list of conditions and the following disclaimer.
+ *     * Redistributions in binary form must reproduce the above copyright
+ *       notice, this list of conditions and the following disclaimer in the
+ *       documentation and/or other materials provided with the distribution.
+ *     * Neither the name of Ajax.org B.V. nor the
+ *       names of its contributors may be used to endorse or promote products
+ *       derived from this software without specific prior written permission.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL AJAX.ORG B.V. BE LIABLE FOR ANY
+ * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
 define(function(require, exports, module) {
 "use strict";
 
 var config = require("./config");
 var oop = require("./lib/oop");
-//var lang = require("./lib/lang");
-//var net = require("./lib/net");
+var lang = require("./lib/lang");
+var net = require("./lib/net");
 var EventEmitter = require("./lib/event_emitter").EventEmitter;
 var Selection = require("./selection").Selection;
 var TextMode = require("./mode/text").Mode;
@@ -13,6 +43,109 @@ var Document = require("./document").Document;
 var BackgroundTokenizer = require("./background_tokenizer").BackgroundTokenizer;
 //var SearchHighlight = require("./search_highlight").SearchHighlight;
 
+/**
+ * class EditSession
+ *
+ * Stores all the data about [[Editor `Editor`]] state providing easy way to change editors state.  `EditSession` can be attached to only one [[Document `Document`]]. Same `Document` can be attached to several `EditSession`s.
+ *
+ **/
+
+// events 
+/**
+ * EditSession@change(e)
+ * - e (Object): An object containing a `delta` of information about the change.
+ *
+ * Emitted when the document changes.
+ **/
+/**
+ * EditSession@changeTabSize()
+ *
+ * Emitted when the tab size changes, via [[EditSession.setTabSize]].
+ **/
+/**
+ * EditSession@changeOverwrite()
+ *
+ * Emitted when the ability to overwrite text changes, via [[EditSession.setOverwrite]].
+ **/
+/**
+ * EditSession@changeBreakpoint()
+ *
+ * Emitted when the gutter changes, either by setting or removing breakpoints, or when the gutter decorations change.
+ **/
+/**
+ * EditSession@changeFrontMarker()
+ *
+ * Emitted when a front marker changes.
+ **/
+/**
+ * EditSession@changeBackMarker()
+ *
+ * Emitted when a back marker changes.
+ **/
+/**
+ * EditSession@changeAnnotation()
+ *
+ * Emitted when an annotation changes, like through [[EditSession.setAnnotations]].
+ **/
+/**
+ * EditSession@tokenizerUpdate(e)
+ * - e (Object): An object containing one property, `"data"`, that contains information about the changing rows
+ *
+ * Emitted when a background tokenizer asynchronously processes new rows.
+ *
+ **/
+/** hide
+ * EditSession@loadMode(e)
+ * 
+ *
+ *
+ **/
+/** 
+ * EditSession@changeMode()
+ * 
+ * Emitted when the current mode changes.
+ *
+ **/
+/** 
+ * EditSession@changeWrapMode()
+ * 
+ * Emitted when the wrap mode changes.
+ *
+ **/
+/** 
+ * EditSession@changeWrapLimit()
+ * 
+ * Emitted when the wrapping limit changes.
+ *
+ **/
+/**
+ * EditSession@changeFold(e)
+ *
+ * Emitted when a code fold is added or removed.
+ *
+ **/
+ /**
+ * EditSession@changeScrollTop(scrollTop) 
+ * - scrollTop (Number): The new scroll top value
+ *
+ * Emitted when the scroll top changes.
+ **/
+/**
+ * EditSession@changeScrollLeft(scrollLeft) 
+ * - scrollLeft (Number): The new scroll left value
+ *
+ * Emitted when the scroll left changes.
+ **/
+     
+     
+/**
+ * new EditSession(text, mode)
+ * - text (Document | String): If `text` is a `Document`, it associates the `EditSession` with it. Otherwise, a new `Document` is created, with the initial text
+ * - mode (TextMode): The inital language mode to use for the document
+ *
+ * Sets up a new `EditSession` and associates it with the given `Document` and `TextMode`.
+ *
+ **/
 
 var EditSession = function(text, mode) {
     this.$breakpoints = [];
@@ -127,7 +260,6 @@ var EditSession = function(text, mode) {
     };
 
     this.onChangeFold = function(e) {
-    alert('lol');
         var fold = e.data;
         this.$resetRowCache(fold.start.row);
     };
@@ -148,7 +280,7 @@ var EditSession = function(text, mode) {
                 });
             }
 
-//            this.$informUndoManager.schedule();
+            this.$informUndoManager.schedule();
         }
 
         this.bgTokenizer.$updateOnChange(delta);
@@ -163,6 +295,7 @@ var EditSession = function(text, mode) {
     *
     **/
     this.setValue = function(text) {
+
         this.doc.setValue(text);
         this.selection.moveCursorTo(0, 0);
         this.selection.clearSelection();
@@ -262,11 +395,16 @@ var EditSession = function(text, mode) {
         this.$deltasDoc = [];
         this.$deltasFold = [];
 
-//        if (this.$informUndoManager)
-  //          this.$informUndoManager.cancel();
+        if (this.$informUndoManager)
+            this.$informUndoManager.cancel();
 
         if (undoManager) {
             var self = this;
+    /** internal, hide
+    * EditSession.$syncInformUndoManager()
+    *
+    *
+    **/
             this.$syncInformUndoManager = function() {
                 self.$informUndoManager.cancel();
 
@@ -295,8 +433,8 @@ var EditSession = function(text, mode) {
 
                 self.$deltas = [];
             }
-//            this.$informUndoManager =
-  //              lang.deferredCall(this.$syncInformUndoManager);
+            this.$informUndoManager =
+                lang.deferredCall(this.$syncInformUndoManager);
         }
     };
 
@@ -321,12 +459,11 @@ var EditSession = function(text, mode) {
     * Returns the current value for tabs. If the user is using soft tabs, this will be a series of spaces (defined by [[EditSession.getTabSize `getTabSize()`]]); otherwise it's simply `'\t'`.
     **/
     this.getTabString = function() {
-    	//alert(this.getTabSize());
-        //if (this.getUseSoftTabs()) {
-        //    return lang.stringRepeat(" ", this.getTabSize());
-       // } else {
+        if (this.getUseSoftTabs()) {
+            return lang.stringRepeat(" ", this.getTabSize());
+        } else {
             return "\t";
-        //}
+        }
     };
 
     this.$useSoftTabs = true;
@@ -599,13 +736,13 @@ var EditSession = function(text, mode) {
         return inFront ? this.$frontMarkers : this.$backMarkers;
     };
 
-    this.highlight = function(re) {
-        /*if (!this.$searchHighlight) {
+    /*this.highlight = function(re) {
+        if (!this.$searchHighlight) {
             var highlight = new SearchHighlight(null, "ace_selected-word", "text");
             this.$searchHighlight = this.addDynamicMarker(highlight);
         }
-        this.$searchHighlight.setRegexp(re);*/
-    }
+        this.$searchHighlight.setRegexp(re);
+    }*/
     
     // experimental
     this.highlightLines = function(startRow, endRow, clazz, inFront) {
@@ -838,7 +975,7 @@ var EditSession = function(text, mode) {
             if (!config.get("packaged"))
                 return callback();
 
-            //.loadScript(config.moduleUrl(name, "mode"), callback);
+            net.loadScript(config.moduleUrl(name, "mode"), callback);
         }
     };
 
@@ -1758,7 +1895,7 @@ var EditSession = function(text, mode) {
         while (row <= lastRow) {
             foldLine = this.getFoldLine(row, foldLine);
             if (!foldLine) {
-//                tokens = this.$getDisplayTokens(lang.stringTrimRight(lines[row]));
+                tokens = this.$getDisplayTokens(lang.stringTrimRight(lines[row]));
                 wrapData[row] = this.$computeWrapSplits(tokens, wrapLimit, tabSize);
                 row ++;
             } else {

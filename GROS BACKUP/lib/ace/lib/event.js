@@ -32,7 +32,7 @@ define(function(require, exports, module) {
 "use strict";
 
 var keys = require("./keys");
-//var useragent = require("./useragent");
+var useragent = require("./useragent");
 var dom = require("./dom");
 
 exports.addListener = function(elem, type, callback) {
@@ -86,7 +86,7 @@ exports.preventDefault = function(e) {
 exports.getButton = function(e) {
     if (e.type == "dblclick")
         return 0;
-    if (e.type == "contextmenu")// || (e.ctrlKey && useragent.isMac))
+    if (e.type == "contextmenu" || (e.ctrlKey && useragent.isMac))
         return 2;
 
     // DOM Event
@@ -204,7 +204,7 @@ exports.addMultiMouseDownListener = function(el, timeouts, eventHandler, callbac
             return eventHandler[callbackName](eventNames[clicks], e);
     });
 
-/*    if (useragent.isOldIE) {
+    if (useragent.isOldIE) {
         exports.addListener(el, "dblclick", function(e) {
             clicks = 2;
             if (timer)
@@ -213,18 +213,18 @@ exports.addMultiMouseDownListener = function(el, timeouts, eventHandler, callbac
             eventHandler[callbackName]("mousedown", e);
             eventHandler[callbackName](eventNames[clicks], e);
         });
-    }*/
+    }
 };
 
 function normalizeCommandKeys(callback, e, keyCode) {
     var hashId = 0;
- //   if ((useragent.isOpera && !("KeyboardEvent" in window)) && useragent.isMac) {
-   //     hashId = 0 | (e.metaKey ? 1 : 0) | (e.altKey ? 2 : 0)
-   //         | (e.shiftKey ? 4 : 0) | (e.ctrlKey ? 8 : 0);
-  //  } else {
+    if ((useragent.isOpera && !("KeyboardEvent" in window)) && useragent.isMac) {
+        hashId = 0 | (e.metaKey ? 1 : 0) | (e.altKey ? 2 : 0)
+            | (e.shiftKey ? 4 : 0) | (e.ctrlKey ? 8 : 0);
+    } else {
         hashId = 0 | (e.ctrlKey ? 1 : 0) | (e.altKey ? 2 : 0)
             | (e.shiftKey ? 4 : 0) | (e.metaKey ? 8 : 0);
- //   }
+    }
 
     if (keyCode in keys.MODIFIER_KEYS) {
         switch (keys.MODIFIER_KEYS[keyCode]) {
@@ -259,7 +259,7 @@ function normalizeCommandKeys(callback, e, keyCode) {
 
 exports.addCommandKeyListener = function(el, callback) {
     var addListener = exports.addListener;
-  /*  if (useragent.isOldGecko || (useragent.isOpera && !("KeyboardEvent" in window))) {
+    if (useragent.isOldGecko || (useragent.isOpera && !("KeyboardEvent" in window))) {
         // Old versions of Gecko aka. Firefox < 4.0 didn't repeat the keydown
         // event if the user pressed the key for a longer time. Instead, the
         // keydown event was fired once and later on only the keypress event.
@@ -274,16 +274,16 @@ exports.addCommandKeyListener = function(el, callback) {
             return normalizeCommandKeys(callback, e, lastKeyDownKeyCode);
         });
     } else {
-    */    var lastDown = null;
+        var lastDown = null;
 
         addListener(el, "keydown", function(e) {
             lastDown = e.keyIdentifier || e.keyCode;
             return normalizeCommandKeys(callback, e, e.keyCode);
         });
-   // }
+    }
 };
 
-if (window.postMessage){	// && !useragent.isOldIE) {
+if (window.postMessage && !useragent.isOldIE) {
     var postMessageId = 1;
     exports.nextTick = function(callback, win) {
         win = win || window;
